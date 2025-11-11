@@ -141,14 +141,30 @@
 }
 
 .card-rooms {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 30px;
-    overflow-x: auto;
-    padding: 0 30px;
-    margin: 0 20px;
-    scrollbar-width: none;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    ul {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 30px;
+        overflow-x: auto;
+        padding: 0 30px;
+        margin: 0 20px;
+        scrollbar-width: none
+    }
+
+    li {
+        display: flex;
+    }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+        display: block;
+    }
 
     .room-card {
         height: auto;
@@ -169,6 +185,7 @@
     .room-title {
         font-size: 28px;
         margin: 0;
+        font-weight: bold;
     }
 
     .img-room {
@@ -180,16 +197,25 @@
 
     .rating-container {
         display: flex;
-        justify-content: flex-start;
-        align-items: center;
+        align-items: baseline;
         gap: 15px;
-        font-size: 15px;
-        margin-top: 5px;
     }
 
     .rating-stars {
+        display: flex;
+        gap: 0.2rem;
+    }
+
+    .rating-star img {
         margin: 0;
-        color: red;
+        width: 14px;
+        height: 14px;
+    }
+
+    .rating-star-unchecked img {
+        margin: 0;
+        width: 14px;
+        height: 14px;
     }
 
     .room-info {
@@ -204,14 +230,15 @@
 
 
     @media (min-width: $bp-medium) {
-        justify-content: center;
-        overflow-x: visible;
-        gap: 20px;
-        flex-wrap: nowrap;
-        margin: 0 20px;
+        ul {
+            justify-content: center;
+            overflow-x: visible;
+            gap: 3%;
+            flex-wrap: nowrap;
+            margin: 0;
+        }
 
         .room-card {
-            width: 35%;
             height: auto;
             box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.3);
             flex-shrink: 0;
@@ -242,6 +269,11 @@
             margin: 8px 0;
         }
 
+        .rating-stars {
+            display: flex;
+            gap: 0.1rem;
+        }
+
         .room-info {
             font-size: 0.5rem;
             margin: 10px 0 15px;
@@ -253,10 +285,13 @@
     }
 
     @media (min-width: $bp-desktop) {
-        justify-content: center;
-        overflow-x: visible;
-        gap: 60px;
-        flex-wrap: nowrap;
+        ul {
+            justify-content: center;
+            overflow-x: visible;
+            gap: 60px;
+            flex-wrap: nowrap;
+            margin: 0 20px;
+        }
 
         .room-card {
             width: 363px;
@@ -285,7 +320,6 @@
         }
 
         .rating-container {
-            justify-content: space-between;
             font-size: 15px;
             margin: 8px 0;
         }
