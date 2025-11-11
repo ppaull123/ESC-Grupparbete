@@ -1,0 +1,216 @@
+@import 'variables';
+
+header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    background-color: $color-dark;
+    color: white;
+    padding: 5px 10px;
+
+
+    .openMenu {
+        display: inline-flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 7px;
+        background: transparent;
+        border: none;
+        padding: 20px 10px;
+
+
+        span {
+            display: block;
+            width: 51px;
+            height: 7px;
+            background: white;
+            border-radius: 10px;
+        }
+    }
+
+
+    @media (min-width: $bp-medium) {
+        display: block;
+        font-size: 0.6rem;
+        background-color: $color-dark;
+        color: white;
+        padding: 10px 20px;
+
+        .openMenu span {
+            display: none;
+        }
+    }
+
+    @media (min-width: $bp-desktop) {
+        display: block;
+        font-size: 0.6rem;
+        background-color: $color-dark;
+        color: white;
+        padding: 10px 20px;
+
+        .openMenu span {
+            display: none;
+        }
+    }
+
+
+    .header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 20px 10px;
+
+        .logo {
+            font-family: 'Monofett';
+            max-height: 100px;
+            border: 6px solid white;
+            border-radius: 17px;
+            color: white;
+            text-decoration: none;
+            font-size: 40px;
+            padding: 30px 45px 5px 10px;
+        }
+
+        .head-title {
+            width: 6ch;
+            word-wrap: break-word;
+            font-size: 1rem;
+            margin: 0 0 0 10px;
+        }
+    }
+
+
+    @media (min-width: $bp-medium) {
+        .header {
+            align-items: flex-end;
+
+            .head-title {
+                width: auto;
+                font-size: 1rem;
+            }
+        }
+
+        nav {
+            display: block;
+
+            ul {
+                list-style: none;
+                padding: 0;
+                margin: 20px;
+                display: flex;
+                justify-content: center;
+                gap: 10%;
+                font-size: 0.5rem;
+
+                li a {
+                    color: white;
+                    text-decoration: none;
+                    font-weight: bold;
+                }
+
+                li.contact-us a {
+                    color: $color-secondary;
+                }
+            }
+        }
+    }
+
+    @media (min-width: $bp-desktop) {
+        .header {
+            align-items: flex-end;
+
+            .head-title {
+                width: auto;
+                font-size: 1rem;
+            }
+        }
+
+        nav {
+            display: block;
+
+            ul {
+                list-style: none;
+                padding: 0;
+                margin: 20px;
+                display: flex;
+                justify-content: center;
+                gap: 10%;
+                font-size: 0.6rem;
+
+                li a {
+                    color: white;
+                    text-decoration: none;
+                    font-weight: bold;
+                }
+
+                li.contact-us a {
+                    color: $color-secondary;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: $bp-medium) {
+
+    nav {
+        position: fixed;
+        inset: 0;
+        background: $color-dark;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transform: scale(0.95);
+        pointer-events: none;
+        z-index: -10;
+        transition: 0.4s;
+
+
+        .nav-menuContent {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+
+        ul {
+            gap: 70px;
+            font-size: 1.5rem;
+            list-style: none;
+
+            li a {
+                color: white;
+                text-decoration: none;
+            }
+        }
+
+        .closeBtn {
+            display: block;
+            position: absolute;
+            top: 0;
+            right: 20px;
+            background: transparent;
+            border: none;
+            font-size: 3rem;
+        }
+    }
+
+    nav.active {
+        opacity: 1;
+        z-index: 10;
+        pointer-events: all;
+    }
+
+}
+
+body.menu-open> :not(header) {
+    opacity: 0.5;
+}
+
+header.menu-open {
+    background-color: #2d3941;
+}

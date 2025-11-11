@@ -1,0 +1,24 @@
+@import 'variables';
+@import 'components';
+@import 'header';
+@import 'body';
+@import 'footer';
+
+
+html,
+body {
+    font-size: clamp(24px, 3.5vw, 40px);
+    margin: 0;
+    font-family: $font-main;
+    max-width: 100vw;
+    overflow-x: hidden;
+    background-color: white;
+}
+
+@media (min-width: $bp-desktop) {
+
+    html,
+    body {
+        max-height: 100vh;
+    }
+}
