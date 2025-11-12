@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>ESC - Hacker Escape Room</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="./main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Monofett' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        /* .online-onsite {
+            display:flex;
+            flex-direction: column;
+
+        } */
+
+        /* starts div */
+        .rating {
+
+            display: inline-flex;
+            /*stars highlighted from left to right*/
+            flex-direction: row-reverse;
+            gap: 0.1em;
+        }
+
+        /*hide input*/
+        .minRating-input,
+        .maxRating-input {
+            display: none;
+        }
+
+        /*empty star*/
+        .minRating-label,
+        .maxRating-label {
+            width: 0.5rem;
+            height: 0.5rem;
+            cursor: pointer;
+            background: url('./src/unceckedRatingStar.png') no-repeat center / contain;
+        }
+
+        /*red star*/
+        .minRating-input:checked~.minRating-label,
+        .minRating-input:checked~.maxRating-label,
+        .minRating-label:hover,
+        .minRating-label:hover~.minRating-label,
+        .maxRating-label:hover,
+        .maxRating-label:hover~.maxRating-label {
+            background: url('./src/checkedRatingStar.png') no-repeat center / contain;
+        }
+
+        .keyword-input {
+            /* height: 3em;
+            width: 20em; */
+            font-size: 1em;
+        }
+
+        fieldset {
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Our challenges</h2>
+    <form action="#" method="get">
+        <fieldset class="online-onsite">
+            <legend>By type</legend>
+            <input type="checkbox" id="online_challenges" name="checkbox">
+            <label for="checkbox">Include online challenges</label>
+            <input type="checkbox" id="on-site_challenges" name="checkbox">
+            <label for="checkbox">Include on-site challenges</label>
+        </fieldset>
+
+        <fieldset class="rating1">
+            <legend>By rating</legend>
+            <div class="rating" aria-label="Minimum rating">
+                <input class="minRating-input" type="radio" id="min-1" name="minRating" value="1">
+                <label class="minRating-label" for="min-1"></label>
+
+                <input class="minRating-input" type="radio" id="min-2" name="minRating" value="2">
+                <label class="minRating-label" for="min-2"></label>
+
+                <input class="minRating-input" type="radio" id="min-3" name="minRating" value="3">
+                <label class="minRating-label" for="min-3"></label>
+
+                <input class="minRating-input" type="radio" id="min-4" name="minRating" value="4">
+                <label class="minRating-label" for="min-4"></label>
+
+                <input class="minRating-input" type="radio" id="min-5" name="minRating" value="5">
+                <label class="minRating-label" for="min-5"></label>
+            </div>
+            <small>to</small>
+            <div class="rating" aria-label="Maximum rating">
+                <input class="maxRating-input" type="radio" id="max-1" name="maxRating" value="1">
+                <label class="maxRating-label" for="max-1"></label>
+
+                <input class="maxRating-input" type="radio" id="max-2" name="maxRating" value="2">
+                <label class="maxRating-label" for="max-2"></label>
+
+                <input class="maxRating-input" type="radio" id="max-3" name="maxRating" value="3">
+                <label class="maxRating-label" for="max-3"></label>
+
+                <input class="maxRating-input" type="radio" id="max-4" name="maxRating" value="4">
+                <label class="maxRating-label" for="max-4"></label>
+
+                <input class="maxRating-input" type="radio" id="max-5" name="maxRating" value="5">
+                <label class="maxRating-label" for="max-5"></label>
+            </div>
+        </fieldset>
+
+        <fieldset class="keyword">
+            <legend>Or type to search for keyword</legend>
+            <label class="keyword-label" for="type"></label>
+            <input class="keyword-input" type="text" placeholder="Start typing to filter">
+        </fieldset>
+
+
+        <!-- <input type="submit" name="send" value="send"> -->
+
+    </form>
+
+    <script src="./index.js"></script>
+</body>
+
+</html>
