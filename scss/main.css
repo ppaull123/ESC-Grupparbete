@@ -580,7 +580,8 @@ header.menu-open {
   width: 100%;
   height: auto;
   max-height: 274px;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   margin-bottom: 20px;
 }
 @media (min-width: 1200px) {
@@ -626,7 +627,7 @@ header.menu-open {
     gap: 70px;
   }
   .bio-quote .quote-bio--1,
-  .bio-quote .quote-bio--2 {
+.bio-quote .quote-bio--2 {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -658,7 +659,7 @@ header.menu-open {
     gap: 70px;
   }
   .bio-quote .quote-bio--1,
-  .bio-quote .quote-bio--2 {
+.bio-quote .quote-bio--2 {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -787,7 +788,8 @@ header.menu-open {
   .card-rooms .img-room {
     width: 100%;
     height: auto;
-    object-fit: cover;
+    -o-object-fit: cover;
+       object-fit: cover;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
   }
@@ -834,7 +836,8 @@ header.menu-open {
   .card-rooms .img-room {
     width: 363px;
     height: 219px;
-    object-fit: cover;
+    -o-object-fit: cover;
+       object-fit: cover;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
   }
@@ -919,7 +922,7 @@ header.menu-open {
     margin-bottom: 10%;
   }
   .teambuilding .section-teambuilding,
-  .teambuilding .section-play-online {
+.teambuilding .section-play-online {
     display: contents;
   }
   .teambuilding .img-teambuilding {
@@ -945,19 +948,20 @@ header.menu-open {
     grid-area: 2/2/3/3;
   }
   .teambuilding .section1-p-header,
-  .teambuilding .section2-p-header {
+.teambuilding .section2-p-header {
     margin: 60px 10px 0;
     font-size: 0.8rem;
   }
   .teambuilding .section1-p-body,
-  .teambuilding .section2-p-body {
+.teambuilding .section2-p-body {
     font-size: 0.5rem;
     margin: 15px 10px;
   }
   .teambuilding img {
     width: 100%;
     height: auto;
-    object-fit: cover;
+    -o-object-fit: cover;
+       object-fit: cover;
   }
 }
 @media (min-width: 1200px) {
@@ -971,7 +975,7 @@ header.menu-open {
     margin-bottom: 180px;
   }
   .teambuilding .section-teambuilding,
-  .teambuilding .section-play-online {
+.teambuilding .section-play-online {
     display: contents;
   }
   .teambuilding .img-teambuilding {
@@ -997,11 +1001,11 @@ header.menu-open {
     grid-area: 2/2/3/3;
   }
   .teambuilding .section1-p-header,
-  .teambuilding .section2-p-header {
+.teambuilding .section2-p-header {
     margin: 60px 10px 0;
   }
   .teambuilding .section1-p-body,
-  .teambuilding .section2-p-body {
+.teambuilding .section2-p-body {
     font-size: 24px;
     margin: 25px 10px;
   }
@@ -1095,7 +1099,9 @@ footer .footer-socials li a {
   display: flex;
   gap: 30px;
   align-items: flex-start;
+  width: 100%;
   overflow-x: auto;
+  scroll-snap-type: x mandatory;
   padding-bottom: 10px;
 }
 .challenges__card {
@@ -1110,6 +1116,7 @@ footer .footer-socials li a {
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
+  scroll-snap-align: start;
 }
 .challenges__card-title {
   font-size: 18px;
@@ -1126,8 +1133,10 @@ footer .footer-socials li a {
 .challenges__image {
   width: 100%;
   height: 200px;
-  object-fit: cover;
-  object-position: center;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
   display: block;
 }
 .challenges__rating {
@@ -1141,7 +1150,6 @@ footer .footer-socials li a {
   display: flex;
   gap: 4px;
   align-items: center;
-  transform: translateY(-175px);
 }
 .challenges__star {
   width: 20px;
@@ -1169,7 +1177,7 @@ footer .footer-socials li a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 6px 12px;
+  padding: 12px 30px;
   border: 0;
   border-radius: 4px;
   font-weight: bold;
@@ -1179,7 +1187,6 @@ footer .footer-socials li a {
   transition: opacity 0.3s;
   background-color: #E3170A;
   color: #ffffff;
-  width: auto;
 }
 .challenges__icon__online {
   width: clamp(30px, 5vw, 60px);
@@ -1187,21 +1194,6 @@ footer .footer-socials li a {
   position: absolute;
   top: 15px;
   right: 15px;
-}
-
-.challenges__wrapper {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-.challenges {
-  width: 100%;
-  margin: 0;
-  padding: 20px;
 }
 
 html,
@@ -1216,7 +1208,8 @@ body {
 
 @media (min-width: 1200px) {
   html,
-  body {
+body {
     max-height: 100vh;
   }
 }
+/*# sourceMappingURL=main.css.map */
