@@ -10,20 +10,114 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Monofett' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-        /* .online-onsite {
-            display:flex;
-            flex-direction: column;
+    <!-- <style>
+        fieldset {
+            border: none;
+        }
 
-        } */
+        .filterForm {
+            padding: 1rem;
+            font-size: 0.5rem;
+        }
 
-        /* starts div */
-        .rating {
+        @media screen and (min-width: 767px) {
+            .filterForm {
+                display: grid;
+                grid-template-columns: 3;
+                grid-template-rows: 4;
+                /* gap: 2em; */
+                margin: 1rem;
+            }
 
+            .filterForm__heading {
+                grid-row: 1;
+                grid-column: 1/3;
+            }
+
+        }
+
+        /*CHECKBOX online vs on-site*/
+        .checkboxFilter {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            align-items: center;
+            gap: 0.5rem 0.5rem;
+            padding: 0.5rem;
+            margin: 0;
+        }
+
+        .checkboxFilter__heading {
+            font-weight: 700;
+            padding: 1rem 0 0 0;
+            margin: 0;
+
+        }
+
+        .checkbox-item {
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0;
+            width: 0.3rem;
+            height: 0.3rem;
+        }
+
+        @media screen and (min-width: 767px) {
+            .checkboxFilter {
+                grid-row: 2;
+                grid-column: 1;
+                gap: 0.1em;
+                justify-content: center;
+
+            }
+
+            .checkboxFilter__heading {
+                grid-column: 1/3;
+                grid-row: 1;
+                font-weight: 700;
+            }
+
+            .checkbox-item {
+                grid-column: 1;
+                cursor: pointer;
+                justify-self: left;
+                align-self: top;
+                margin: 0;
+                padding: 0;
+            }
+
+            .checkbox-label {
+                grid-column: 2;
+                justify-self: left;
+                align-self: top;
+                margin-left: 0.2rem;
+                padding: 0;
+
+            }
+        }
+
+
+        /*RATING VIDGET*/
+        .ratingFilter {
+            display: flex;
+            padding: 0.5rem;
+            margin: 0;
+            align-items: baseline;
+        }
+
+        /* stars div */
+        .ratingFilter__vidget {
+            padding: 0.5rem;
             display: inline-flex;
-            /*stars highlighted from left to right*/
-            flex-direction: row-reverse;
             gap: 0.1em;
+            /* for showing correct rating value */
+            flex-direction: row-reverse;
+        }
+
+        .ratingFilter__heading {
+            justify-content: left;
+            font-weight: 700;
+            padding: 1rem 0 0 0;
+            margin: 0;
         }
 
         /* hide input */
@@ -41,9 +135,9 @@
             background: url('./src/unceckedRatingStar.png') no-repeat center / contain;
         }
 
-        /* red sta */
+        /* red star */
         .minRating-input:checked~.minRating-label,
-        .minRating-input:checked~.maxRating-label,
+        .maxRating-input:checked~.maxRating-label,
         .minRating-label:hover,
         .minRating-label:hover~.minRating-label,
         .maxRating-label:hover,
@@ -51,75 +145,166 @@
             background: url('./src/checkedRatingStar.png') no-repeat center / contain;
         }
 
-        .keyword-input {
-            /* height: 3em;
-            width: 20em; */
-            font-size: 1em;
+        @media screen and (min-width: 767px) {
+            .ratingFilter {
+                flex-wrap: nowrap;
+                grid-row: 2;
+                grid-column: 2;
+            }
+
         }
 
-        fieldset {
-            border: none;
+        /*TAG filter*/
+        .tagFilter {
+            /* display: flex; */
+            padding: 0.5rem;
+            margin: 0;
         }
-    </style>
+
+        .tagFilter__heading {
+            left: 0.5rem;
+            font-weight: 700;
+            padding: 1rem 0 0 0;
+            margin: 0;
+        }
+
+        .tag__list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .tag-item {
+            display: inline-block;
+            gap: 0.5rem;
+
+        }
+
+        @media screen and (min-width: 767px) {
+            .tagFilter {
+                grid-row: 2;
+                grid-column: 3;
+            }
+        }
+
+        /*KEYWORD filter*/
+
+        .keywordFilter {
+            padding: 0.5rem;
+            margin: 0;
+        }
+
+        .keywordFilter__heading {
+            justify-content: left;
+            font-weight: 700;
+            padding: 1rem 0 0 0;
+            margin: 0;
+        }
+
+        .keyword-input {
+            font-weight: 700;
+            padding: 0.1rem;
+            margin: 0;
+        }
+
+        @media screen and (min-width: 767px) {
+            .keywordFilter {
+                grid-row: 3;
+                grid-column: 1/3;
+                justify-self: center;
+            }
+        }
+
+        /*Filter info*/
+
+        .filterForm__info {
+            justify-self: center;
+            font-size: 1rem;
+            padding: 0.5rem;
+            margin: 0;
+
+        }
+
+        @media screen and (min-width: 767px) {
+            .filterForm__info {
+                grid-row: 4;
+                grid-column: 1/3;
+            }
+        }
+    </style> -->
 </head>
 
 <body>
-    <h2>Our challenges</h2>
-    <form action="#" method="get">
-        <fieldset class="online-onsite">
-            <legend>By type</legend>
-            <input type="checkbox" id="online_challenges" name="checkbox">
-            <label for="checkbox">Include online challenges</label>
-            <input type="checkbox" id="on-site_challenges" name="checkbox">
-            <label for="checkbox">Include on-site challenges</label>
+
+    <form class="filterForm">
+        <h2 class="filterForm__heading">Filter challenges</h2>
+
+        <fieldset class="checkboxFilter">
+            <legend class="checkboxFilter__heading">By type</legend>
+            <input class="checkbox-item" type="checkbox" id="online_challenges" name="checkbox" value="online">
+            <label class="checkbox-label" for="online_challenges">Include online challenges</label>
+
+            <input class="checkbox-item" type="checkbox" id="on-site_challenges" name="checkbox" value="on-site">
+            <label class="checkbox-label" for="on-site_challenges">Include on-site challenges</label>
         </fieldset>
 
-        <fieldset class="rating1">
-            <legend>By rating</legend>
-            <div class="rating" aria-label="Minimum rating">
-                <input class="minRating-input" type="radio" id="min-1" name="minRating" value="1">
-                <label class="minRating-label" for="min-1"></label>
+        <fieldset class="ratingFilter">
+            <legend class="ratingFilter__heading">By rating</legend>
 
-                <input class="minRating-input" type="radio" id="min-2" name="minRating" value="2">
-                <label class="minRating-label" for="min-2"></label>
-
-                <input class="minRating-input" type="radio" id="min-3" name="minRating" value="3">
-                <label class="minRating-label" for="min-3"></label>
+            <div class="ratingFilter__vidget" aria-label="Minimum rating">
+                <input class="minRating-input" type="radio" id="min-5" name="minRating" value="5">
+                <label class="minRating-label" for="min-5"></label>
 
                 <input class="minRating-input" type="radio" id="min-4" name="minRating" value="4">
                 <label class="minRating-label" for="min-4"></label>
 
-                <input class="minRating-input" type="radio" id="min-5" name="minRating" value="5">
-                <label class="minRating-label" for="min-5"></label>
+                <input class="minRating-input" type="radio" id="min-3" name="minRating" value="3">
+                <label class="minRating-label" for="min-3"></label>
+
+                <input class="minRating-input" type="radio" id="min-2" name="minRating" value="2">
+                <label class="minRating-label" for="min-2"></label>
+
+                <input class="minRating-input" type="radio" id="min-1" name="minRating" value="1">
+                <label class="minRating-label" for="min-1"></label>
             </div>
+
             <small>to</small>
-            <div class="rating" aria-label="Maximum rating">
-                <input class="maxRating-input" type="radio" id="max-1" name="maxRating" value="1">
-                <label class="maxRating-label" for="max-1"></label>
 
-                <input class="maxRating-input" type="radio" id="max-2" name="maxRating" value="2">
-                <label class="maxRating-label" for="max-2"></label>
-
-                <input class="maxRating-input" type="radio" id="max-3" name="maxRating" value="3">
-                <label class="maxRating-label" for="max-3"></label>
+            <div class="ratingFilter__vidget" aria-label="Maximum rating">
+                <input class="maxRating-input" type="radio" id="max-5" name="maxRating" value="5">
+                <label class="maxRating-label" for="max-5"></label>
 
                 <input class="maxRating-input" type="radio" id="max-4" name="maxRating" value="4">
                 <label class="maxRating-label" for="max-4"></label>
 
-                <input class="maxRating-input" type="radio" id="max-5" name="maxRating" value="5">
-                <label class="maxRating-label" for="max-5"></label>
+                <input class="maxRating-input" type="radio" id="max-3" name="maxRating" value="3">
+                <label class="maxRating-label" for="max-3"></label>
+
+                <input class="maxRating-input" type="radio" id="max-2" name="maxRating" value="2">
+                <label class="maxRating-label" for="max-2"></label>
+
+                <input class="maxRating-input" type="radio" id="max-1" name="maxRating" value="1">
+                <label class="maxRating-label" for="max-1"></label>
             </div>
         </fieldset>
 
-        <fieldset class="keyword">
-            <legend>Or type to search for keyword</legend>
+        <fieldset class="tagFilter">
+            <legend class="tagFilter__heading">By tag</legend>
+            <ul class="tag__list">
+                <li class="tag-item">Linux</li>
+                <li class="tag-item">Webb</li>
+                <li class="tag-item">Cryptography</li>
+                <li class="tag-item">Coding</li>
+            </ul>
+        </fieldset>
+
+        <fieldset class="keywordFilter">
+            <legend class="keywordFilter__heading">Or type to search for keyword</legend>
             <label class="keyword-label" for="type"></label>
             <input class="keyword-input" type="text" placeholder="Start typing to filter">
         </fieldset>
 
-
-        <!-- <input type="submit" name="send" value="send"> -->
-
+        <p class="filterForm__info">No matching challenges</p>
     </form>
 
     <script src="./index.js"></script>
