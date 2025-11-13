@@ -580,8 +580,7 @@ header.menu-open {
   width: 100%;
   height: auto;
   max-height: 274px;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   margin-bottom: 20px;
 }
 @media (min-width: 1200px) {
@@ -788,8 +787,7 @@ header.menu-open {
   .card-rooms .img-room {
     width: 100%;
     height: auto;
-    -o-object-fit: cover;
-       object-fit: cover;
+    object-fit: cover;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
   }
@@ -836,8 +834,7 @@ header.menu-open {
   .card-rooms .img-room {
     width: 363px;
     height: 219px;
-    -o-object-fit: cover;
-       object-fit: cover;
+    object-fit: cover;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
   }
@@ -960,8 +957,7 @@ header.menu-open {
   .teambuilding img {
     width: 100%;
     height: auto;
-    -o-object-fit: cover;
-       object-fit: cover;
+    object-fit: cover;
   }
 }
 @media (min-width: 1200px) {
@@ -1097,4 +1093,4 @@ body {
   body {
     max-height: 100vh;
   }
-}/*# sourceMappingURL=main.css.map */
+}
