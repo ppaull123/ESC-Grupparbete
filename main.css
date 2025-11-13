@@ -698,6 +698,11 @@ header.menu-open {
 }
 
 .card-rooms {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.card-rooms ul {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -706,6 +711,14 @@ header.menu-open {
   padding: 0 30px;
   margin: 0 20px;
   scrollbar-width: none;
+}
+.card-rooms li {
+  display: flex;
+}
+.card-rooms a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
 }
 .card-rooms .room-card {
   height: auto;
@@ -725,6 +738,7 @@ header.menu-open {
 .card-rooms .room-title {
   font-size: 28px;
   margin: 0;
+  font-weight: bold;
 }
 .card-rooms .img-room {
   width: 100%;
@@ -734,15 +748,22 @@ header.menu-open {
 }
 .card-rooms .rating-container {
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  align-items: baseline;
   gap: 15px;
-  font-size: 15px;
-  margin-top: 5px;
 }
 .card-rooms .rating-stars {
+  display: flex;
+  gap: 0.2rem;
+}
+.card-rooms .rating-star img {
   margin: 0;
-  color: red;
+  width: 14px;
+  height: 14px;
+}
+.card-rooms .rating-star-unchecked img {
+  margin: 0;
+  width: 14px;
+  height: 14px;
 }
 .card-rooms .room-info {
   display: flex;
@@ -753,15 +774,14 @@ header.menu-open {
   font-size: 14px;
 }
 @media (min-width: 767px) {
-  .card-rooms {
+  .card-rooms ul {
     justify-content: center;
     overflow-x: visible;
-    gap: 20px;
+    gap: 3%;
     flex-wrap: nowrap;
-    margin: 0 20px;
+    margin: 0;
   }
   .card-rooms .room-card {
-    width: 35%;
     height: auto;
     box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.3);
     flex-shrink: 0;
@@ -788,6 +808,10 @@ header.menu-open {
     font-size: 15px;
     margin: 8px 0;
   }
+  .card-rooms .rating-stars {
+    display: flex;
+    gap: 0.1rem;
+  }
   .card-rooms .room-info {
     font-size: 0.5rem;
     margin: 10px 0 15px;
@@ -797,11 +821,12 @@ header.menu-open {
   }
 }
 @media (min-width: 1200px) {
-  .card-rooms {
+  .card-rooms ul {
     justify-content: center;
     overflow-x: visible;
     gap: 60px;
     flex-wrap: nowrap;
+    margin: 0 20px;
   }
   .card-rooms .room-card {
     width: 363px;
@@ -827,7 +852,6 @@ header.menu-open {
     margin: 0 0 8px 0;
   }
   .card-rooms .rating-container {
-    justify-content: space-between;
     font-size: 15px;
     margin: 8px 0;
   }
