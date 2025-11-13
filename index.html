@@ -75,7 +75,7 @@
     <div class="card-rooms">
         <ul>
             <li>
-                <a href="">
+                <!-- <a href=""> -->
                     <div class="room-card room-1">
                         <img src="./src/ESC-hacker.png" alt="Escape room: Title of room (on-site)" class="img-room">
                         <section class="card-bio">
@@ -97,7 +97,7 @@
             </li>
 
             <li>
-                <a href="">
+                <!-- <a href=""> -->
                     <div class="room-card room-2">
                         <img src="./src/ESC-hacker.png" alt="Escape room: Title of room (on-site)" class="img-room">
                         <section class="card-bio">
@@ -119,7 +119,7 @@
             </li>
 
             <li>
-                <a href="">
+                <!-- <a href=""> -->
                     <div class="room-card room-3">
                         <img src="./src/ESC-hacker.png" alt="Escape room: Title of room (on-site)" class="img-room">
                         <section class="card-bio">
@@ -141,6 +141,24 @@
             </li>
         </ul>
     </div>
+
+     <!-- booking/modal rutan -->
+    <div class="modal-overlay hidden">
+        <div class="modal">
+            <button class="modal-close">&times;</button>
+            <h2 class="modal-title">Book room "Title of room" (Step 1)</h2>
+            <p class="modal-text">What date would you like to come?</p>
+            
+            <label for="booking-date" class="modal-label">Date</label>
+            <input id="booking-date" class="modal-input"/>
+
+            <div class="modal-footer">
+                <button class="btn btn--next-step">Search available times</button>
+            </div>
+        </div>
+    </div>
+
+
 
     <div class="buttons buttons--2">
         <button class="btn btn--online">Online challenges</button>
