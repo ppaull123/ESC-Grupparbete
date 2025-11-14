@@ -24,7 +24,15 @@ async function loadChallenges() {
   const container = document.createElement("div");
   container.classList.add("challenges__container");
 
-  challenges.forEach(ch => {
+  // ✅ Detect main page
+  const isMainPage = wrapper?.dataset.page === "main";
+
+  // ✅ Sort by rating descending and take top 3 for main page
+  const challengesToShow = isMainPage
+    ? [...challenges].sort((a, b) => b.rating - a.rating).slice(0, 3)
+    : challenges;
+
+  challengesToShow.forEach(ch => {
     const id = ch.id || 0;
     const type = ch.type || "online";
     const titleText = ch.title || "Untitled Challenge";
@@ -32,10 +40,9 @@ async function loadChallenges() {
     const minP = ch.minParticipants || 1;
     const maxP = ch.maxParticipants || 1;
     const rating = ch.rating || 0;
-    const image = ch.image; // removed default.png
+    const image = ch.image; 
     const labels = ch.labels || [];
 
-    // Combine API labels with full set for filtering
     const combinedLabels = Array.from(new Set([...labels, ...allLabels]));
 
     const card = document.createElement("article");
@@ -70,7 +77,7 @@ async function loadChallenges() {
 
     const labelsDiv = document.createElement("div");
     labelsDiv.classList.add("challenges__labels");
-    labelsDiv.style.display = "none"; // hide initially
+    labelsDiv.style.display = "none"; 
 
     combinedLabels.forEach(label => {
       const span = document.createElement("span");
