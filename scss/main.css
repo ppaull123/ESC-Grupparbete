@@ -1349,23 +1349,41 @@ fieldset {
 }
 
 .filterForm {
+  display: none;
+}
+.filterForm--active {
+  display: block;
+  position: relative;
   padding: 1rem;
   font-size: 0.5rem;
 }
-
 @media screen and (min-width: 767px) {
-  .filterForm {
+  .filterForm--active {
     display: grid;
     grid-template-columns: 3;
     grid-template-rows: 4;
-    /* gap: 2em; */
     margin: 1rem;
   }
-  .filterForm__heading {
-    grid-row: 1;
-    grid-column: 1/3;
-  }
 }
+.filterForm__heading {
+  grid-row: 1;
+  grid-column: 1/3;
+}
+.filterForm__closeBtn {
+  /* display: inline-flex;
+     align-items: center;
+     justify-content: center; */
+  height: 2rem;
+  width: 2rem;
+  font-weight: 700;
+  position: fixed;
+  z-index: 5;
+  top: 0.5rem;
+  right: 0.5rem;
+  border: none;
+  background: none;
+}
+
 /*CHECKBOX online vs on-site*/
 .checkboxFilter {
   display: grid;
@@ -1377,21 +1395,6 @@ fieldset {
   padding: 0.5rem;
   margin: 0;
 }
-
-.checkboxFilter__heading {
-  font-weight: 700;
-  padding: 1rem 0 0 0;
-  margin: 0;
-}
-
-.checkbox-item {
-  display: inline-block;
-  vertical-align: middle;
-  margin: 0;
-  width: 0.3rem;
-  height: 0.3rem;
-}
-
 @media screen and (min-width: 767px) {
   .checkboxFilter {
     grid-row: 2;
@@ -1401,12 +1404,29 @@ fieldset {
         -ms-flex-pack: center;
             justify-content: center;
   }
+}
+.checkboxFilter__heading {
+  font-weight: 700;
+  padding: 1rem 0 0 0;
+  margin: 0;
+}
+@media screen and (min-width: 767px) {
   .checkboxFilter__heading {
     grid-column: 1/3;
     grid-row: 1;
     font-weight: 700;
   }
-  .checkbox-item {
+}
+
+.checkbox__item {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0;
+  width: 0.3rem;
+  height: 0.3rem;
+}
+@media screen and (min-width: 767px) {
+  .checkbox__item {
     grid-column: 1;
     cursor: pointer;
     justify-self: left;
@@ -1414,7 +1434,10 @@ fieldset {
     margin: 0;
     padding: 0;
   }
-  .checkbox-label {
+}
+
+@media screen and (min-width: 767px) {
+  .checkbox__label {
     grid-column: 2;
     justify-self: left;
     align-self: top;
@@ -1422,7 +1445,8 @@ fieldset {
     padding: 0;
   }
 }
-/*RATING VIDGET*/
+
+/*RATING WIDGET*/
 .ratingFilter {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1432,10 +1456,25 @@ fieldset {
   -webkit-box-align: baseline;
       -ms-flex-align: baseline;
           align-items: baseline;
+  /* stars div */
 }
-
-/* stars div */
-.ratingFilter__vidget {
+@media screen and (min-width: 767px) {
+  .ratingFilter {
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+    grid-row: 2;
+    grid-column: 2;
+  }
+}
+.ratingFilter__heading {
+  -webkit-box-pack: left;
+      -ms-flex-pack: left;
+          justify-content: left;
+  font-weight: 700;
+  padding: 1rem 0 0 0;
+  margin: 0;
+}
+.ratingFilter__widget {
   padding: 0.5rem;
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
@@ -1448,24 +1487,15 @@ fieldset {
           flex-direction: row-reverse;
 }
 
-.ratingFilter__heading {
-  -webkit-box-pack: left;
-      -ms-flex-pack: left;
-          justify-content: left;
-  font-weight: 700;
-  padding: 1rem 0 0 0;
-  margin: 0;
-}
-
 /* hide input */
-.minRating-input,
-.maxRating-input {
+.minRating__input,
+.maxRating__input {
   display: none;
 }
 
 /* empty star */
-.minRating-label,
-.maxRating-label {
+.minRating__label,
+.maxRating__label {
   width: 0.5rem;
   height: 0.5rem;
   cursor: pointer;
@@ -1473,60 +1503,54 @@ fieldset {
 }
 
 /* red star */
-.minRating-input:checked ~ .minRating-label,
-.maxRating-input:checked ~ .maxRating-label,
-.minRating-label:hover,
-.minRating-label:hover ~ .minRating-label,
-.maxRating-label:hover,
-.maxRating-label:hover ~ .maxRating-label {
+.minRating__input:checked ~ .minRating__label,
+.maxRating__input:checked ~ .maxRating__label,
+.minRating__label:hover,
+.minRating__label:hover ~ .minRating__label,
+.maxRating__label:hover,
+.maxRating__label:hover ~ .maxRating__label {
   background: url("./src/checkedRatingStar.png") no-repeat center/contain;
 }
 
-@media screen and (min-width: 767px) {
-  .ratingFilter {
-    -ms-flex-wrap: nowrap;
-        flex-wrap: nowrap;
-    grid-row: 2;
-    grid-column: 2;
-  }
-}
 /*TAG filter*/
 .tagFilter {
-  /* display: flex; */
   padding: 0.5rem;
   margin: 0;
 }
-
-.tagFilter__heading {
-  left: 0.5rem;
-  font-weight: 700;
-  padding: 1rem 0 0 0;
-  margin: 0;
-}
-
-.tag__list {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-.tag-item {
-  display: inline-block;
-  gap: 0.5rem;
-}
-
 @media screen and (min-width: 767px) {
   .tagFilter {
     grid-row: 2;
     grid-column: 3;
   }
 }
+.tagFilter__heading {
+  left: 0.5rem;
+  font-weight: 700;
+  padding: 1rem 0 0 0;
+  margin: 0;
+}
+.tagFilter__list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.tagFilter__item {
+  display: inline-block;
+  gap: 0.5rem;
+}
+
 /*KEYWORD filter*/
 .keywordFilter {
   padding: 0.5rem;
   margin: 0;
 }
-
+@media screen and (min-width: 767px) {
+  .keywordFilter {
+    grid-row: 3;
+    grid-column: 1/3;
+    justify-self: center;
+  }
+}
 .keywordFilter__heading {
   -webkit-box-pack: left;
       -ms-flex-pack: left;
@@ -1535,20 +1559,12 @@ fieldset {
   padding: 1rem 0 0 0;
   margin: 0;
 }
-
-.keyword-input {
+.keywordFilter__input {
   font-weight: 700;
   padding: 0.1rem;
   margin: 0;
 }
 
-@media screen and (min-width: 767px) {
-  .keywordFilter {
-    grid-row: 3;
-    grid-column: 1/3;
-    justify-self: center;
-  }
-}
 /*Filter info*/
 .filterForm__info {
   justify-self: center;
@@ -1556,13 +1572,13 @@ fieldset {
   padding: 0.5rem;
   margin: 0;
 }
-
 @media screen and (min-width: 767px) {
   .filterForm__info {
     grid-row: 4;
     grid-column: 1/3;
   }
 }
+
 html,
 body {
   font-size: clamp(24px, 3.5vw, 40px);

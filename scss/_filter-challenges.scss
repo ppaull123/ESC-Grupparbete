@@ -1,219 +1,227 @@
-fieldset {
-            border: none;
-        }
+ @import 'variables';
+ 
+ fieldset {
+     border: none;
+ }
 
-        .filterForm {
-            padding: 1rem;
-            font-size: 0.5rem;
-        }
+ .filterForm {
+     display: none;
 
-        @media screen and (min-width: 767px) {
-            .filterForm {
-                display: grid;
-                grid-template-columns: 3;
-                grid-template-rows: 4;
-                margin: 1rem;
-            }
+     &--active {
+         display: block;
+         position: relative;
+         padding: 1rem;
+         font-size: 0.5rem;
 
-            .filterForm__heading {
-                grid-row: 1;
-                grid-column: 1/3;
-            }
+         @media screen and (min-width: $bp-medium) {
+             display: grid;
+             grid-template-columns: 3;
+             grid-template-rows: 4;
+             margin: 1rem;
+         }
+     }
 
-        }
+     &__heading {
+         grid-row: 1;
+         grid-column: 1/3;
+     }
 
-        /*CHECKBOX online vs on-site*/
-        .checkboxFilter {
-            display: grid;
-            grid-template-columns: auto 1fr;
+     &__closeBtn {
+         /* display: inline-flex;
             align-items: center;
-            gap: 0.5rem 0.5rem;
-            padding: 0.5rem;
-            margin: 0;
-        }
-
-        .checkboxFilter__heading {
-            font-weight: 700;
-            padding: 1rem 0 0 0;
-            margin: 0;
-
-        }
-
-        .checkbox-item {
-            display: inline-block;
-            vertical-align: middle;
-            margin: 0;
-            width: 0.3rem;
-            height: 0.3rem;
-        }
-
-        @media screen and (min-width: 767px) {
-            .checkboxFilter {
-                grid-row: 2;
-                grid-column: 1;
-                gap: 0.1em;
-                justify-content: center;
-
-            }
-
-            .checkboxFilter__heading {
-                grid-column: 1/3;
-                grid-row: 1;
-                font-weight: 700;
-            }
-
-            .checkbox-item {
-                grid-column: 1;
-                cursor: pointer;
-                justify-self: left;
-                align-self: top;
-                margin: 0;
-                padding: 0;
-            }
-
-            .checkbox-label {
-                grid-column: 2;
-                justify-self: left;
-                align-self: top;
-                margin-left: 0.2rem;
-                padding: 0;
-
-            }
-        }
+            justify-content: center; */
+         height: 2rem;
+         width: 2rem;
+         font-weight: 700;
+         position: fixed;
+         z-index: 5;
+         top: 0.5rem;
+         right: 0.5rem;
+         border: none;
+         background: none;
+     }
+ }
 
 
-        /*RATING VIDGET*/
-        .ratingFilter {
-            display: flex;
-            padding: 0.5rem;
-            margin: 0;
-            align-items: baseline;
-        }
+ /*CHECKBOX online vs on-site*/
+ .checkboxFilter {
+     display: grid;
+     grid-template-columns: auto 1fr;
+     align-items: center;
+     gap: 0.5rem 0.5rem;
+     padding: 0.5rem;
+     margin: 0;
 
-        /* stars div */
-        .ratingFilter__vidget {
-            padding: 0.5rem;
-            display: inline-flex;
-            gap: 0.1em;
-            /* for showing correct rating value */
-            flex-direction: row-reverse;
-        }
+     @media screen and (min-width: $bp-medium) {
+         grid-row: 2;
+         grid-column: 1;
+         gap: 0.1em;
+         justify-content: center;
+     }
 
-        .ratingFilter__heading {
-            justify-content: left;
-            font-weight: 700;
-            padding: 1rem 0 0 0;
-            margin: 0;
-        }
+     &__heading {
+         font-weight: 700;
+         padding: 1rem 0 0 0;
+         margin: 0;
 
-        /* hide input */
-        .minRating-input,
-        .maxRating-input {
-            display: none;
-        }
+         @media screen and (min-width: $bp-medium) {
+             grid-column: 1/3;
+             grid-row: 1;
+             font-weight: 700;
+         }
+     }
+    }
+     .checkbox__item {
+         display: inline-block;
+         vertical-align: middle;
+         margin: 0;
+         width: 0.3rem;
+         height: 0.3rem;
 
-        /* empty star */
-        .minRating-label,
-        .maxRating-label {
-            width: 0.5rem;
-            height: 0.5rem;
-            cursor: pointer;
-            background: url('./src/unceckedRatingStar.png') no-repeat center / contain;
-        }
+         @media screen and (min-width: $bp-medium) {
+             grid-column: 1;
+             cursor: pointer;
+             justify-self: left;
+             align-self: top;
+             margin: 0;
+             padding: 0;
+         }
+     }
 
-        /* red star */
-        .minRating-input:checked~.minRating-label,
-        .maxRating-input:checked~.maxRating-label,
-        .minRating-label:hover,
-        .minRating-label:hover~.minRating-label,
-        .maxRating-label:hover,
-        .maxRating-label:hover~.maxRating-label {
-            background: url('./src/checkedRatingStar.png') no-repeat center / contain;
-        }
+    .checkbox__label {
+         @media screen and (min-width: $bp-medium) {
+             grid-column: 2;
+             justify-self: left;
+             align-self: top;
+             margin-left: 0.2rem;
+             padding: 0;
+         }
+     }
 
-        @media screen and (min-width: 767px) {
-            .ratingFilter {
-                flex-wrap: nowrap;
-                grid-row: 2;
-                grid-column: 2;
-            }
 
-        }
+ /*RATING WIDGET*/
+ .ratingFilter {
+     display: flex;
+     padding: 0.5rem;
+     margin: 0;
+     align-items: baseline;
 
-        /*TAG filter*/
-        .tagFilter {
-            /* display: flex; */
-            padding: 0.5rem;
-            margin: 0;
-        }
+     @media screen and (min-width: $bp-medium) {
+         flex-wrap: nowrap;
+         grid-row: 2;
+         grid-column: 2;
+     }
 
-        .tagFilter__heading {
-            left: 0.5rem;
-            font-weight: 700;
-            padding: 1rem 0 0 0;
-            margin: 0;
-        }
+     &__heading {
+         justify-content: left;
+         font-weight: 700;
+         padding: 1rem 0 0 0;
+         margin: 0;
+     }
 
-        .tag__list {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
+     /* stars div */
+     &__widget {
+         padding: 0.5rem;
+         display: inline-flex;
+         gap: 0.1em;
+         /* for showing correct rating value */
+         flex-direction: row-reverse;
+     }
 
-        .tag-item {
-            display: inline-block;
-            gap: 0.5rem;
+ }
 
-        }
+ /* hide input */
+ .minRating__input,
+ .maxRating__input {
+     display: none;
+ }
 
-        @media screen and (min-width: 767px) {
-            .tagFilter {
-                grid-row: 2;
-                grid-column: 3;
-            }
-        }
+ /* empty star */
+ .minRating__label,
+ .maxRating__label {
+     width: 0.5rem;
+     height: 0.5rem;
+     cursor: pointer;
+     background: url('./src/unceckedRatingStar.png') no-repeat center / contain;
+ }
 
-        /*KEYWORD filter*/
+ /* red star */
+ .minRating__input:checked~.minRating__label,
+ .maxRating__input:checked~.maxRating__label,
+ .minRating__label:hover,
+ .minRating__label:hover~.minRating__label,
+ .maxRating__label:hover,
+ .maxRating__label:hover~.maxRating__label {
+     background: url('./src/checkedRatingStar.png') no-repeat center / contain;
+ }
 
-        .keywordFilter {
-            padding: 0.5rem;
-            margin: 0;
-        }
 
-        .keywordFilter__heading {
-            justify-content: left;
-            font-weight: 700;
-            padding: 1rem 0 0 0;
-            margin: 0;
-        }
+ /*TAG filter*/
+ .tagFilter {
+     padding: 0.5rem;
+     margin: 0;
 
-        .keyword-input {
-            font-weight: 700;
-            padding: 0.1rem;
-            margin: 0;
-        }
+     @media screen and (min-width: $bp-medium) {
+         grid-row: 2;
+         grid-column: 3;
+     }
 
-        @media screen and (min-width: 767px) {
-            .keywordFilter {
-                grid-row: 3;
-                grid-column: 1/3;
-                justify-self: center;
-            }
-        }
+     &__heading {
+         left: 0.5rem;
+         font-weight: 700;
+         padding: 1rem 0 0 0;
+         margin: 0;
+     }
 
-        /*Filter info*/
+     &__list {
+         list-style-type: none;
+         padding: 0;
+         margin: 0;
+     }
 
-        .filterForm__info {
-            justify-self: center;
-            font-size: 1rem;
-            padding: 0.5rem;
-            margin: 0;
+     &__item {
+         display: inline-block;
+         gap: 0.5rem;
+     }
+ }
 
-        }
 
-        @media screen and (min-width: 767px) {
-            .filterForm__info {
-                grid-row: 4;
-                grid-column: 1/3;
-            }
-        }
+ /*KEYWORD filter*/
+ .keywordFilter {
+     padding: 0.5rem;
+     margin: 0;
+
+      @media screen and (min-width: 767px) {
+         grid-row: 3;
+         grid-column: 1/3;
+         justify-self: center;
+     }
+ 
+
+ &__heading {
+     justify-content: left;
+     font-weight: 700;
+     padding: 1rem 0 0 0;
+     margin: 0;
+ }
+
+&__input {
+     font-weight: 700;
+     padding: 0.1rem;
+     margin: 0;
+ }
+ }
+
+
+ /*Filter info*/
+ .filterForm__info {
+     justify-self: center;
+     font-size: 1rem;
+     padding: 0.5rem;
+     margin: 0;
+
+ @media screen and (min-width: 767px) {
+         grid-row: 4;
+         grid-column: 1/3;
+     }
+ }
