@@ -1,52 +1,78 @@
 import { fetchChallenges } from "./api.js";
 
+const allLabels = [
+  "web",
+  "coding",
+  "linux",
+  "electronics",
+  "ssh",
+  "ctf",
+  "phreaking",
+  "javascript",
+  "bash",
+  "hacking"
+];
+
 async function loadChallenges() {
   const challenges = await fetchChallenges(); 
   const wrapper = document.getElementById("challengesWrapper");
   wrapper.innerHTML = "";
 
-  
   const section = document.createElement("section");
   section.classList.add("challenges");
 
   const container = document.createElement("div");
   container.classList.add("challenges__container");
 
-  challenges.forEach(ch => { 
+  challenges.forEach(ch => {
+    const id = ch.id || 0;
+    const type = ch.type || "online";
+    const titleText = ch.title || "Untitled Challenge";
+    const description = ch.description || "";
+    const minP = ch.minParticipants || 1;
+    const maxP = ch.maxParticipants || 1;
+    const rating = ch.rating || 0;
+    const image = ch.image; // removed default.png
+    const labels = ch.labels || [];
+
+    // Combine API labels with full set for filtering
+    const combinedLabels = Array.from(new Set([...labels, ...allLabels]));
+
     const card = document.createElement("article");
     card.classList.add("challenges__card");
-    card.id = `challenge-${ch.id}`; // 
+    card.id = `challenge-${id}`;
 
     const img = document.createElement("img");
     img.classList.add("challenges__image");
-    img.src = ch.image;
-    img.alt = ch.title;
+    img.src = image;
+    img.alt = titleText;
 
     const title = document.createElement("h3");
     title.classList.add("challenges__card-title");
-    title.textContent = ch.title;
+    title.textContent = titleText;
 
     const participants = document.createElement("p");
     participants.classList.add("challenges__participants");
-    participants.textContent = `${ch.minParticipants}–${ch.maxParticipants} participants`;
+    participants.textContent = `${minP}–${maxP} participants`;
 
     const desc = document.createElement("p");
     desc.classList.add("challenges__description");
-    desc.textContent = ch.description;
+    desc.textContent = description;
 
     const ratingDiv = document.createElement("div");
     ratingDiv.classList.add("challenges__rating");
 
     const starsDiv = document.createElement("div");
     starsDiv.classList.add("challenges__stars");
-    starsDiv.innerHTML = renderStars(ch.rating);
+    starsDiv.innerHTML = renderStars(rating);
 
     ratingDiv.appendChild(starsDiv);
 
     const labelsDiv = document.createElement("div");
     labelsDiv.classList.add("challenges__labels");
-    labelsDiv.style.display = "none";
-    ch.labels.forEach(label => {
+    labelsDiv.style.display = "none"; // hide initially
+
+    combinedLabels.forEach(label => {
       const span = document.createElement("span");
       span.classList.add("challenges__label");
       span.textContent = label;
@@ -58,20 +84,14 @@ async function loadChallenges() {
 
     const btn = document.createElement("button");
     btn.classList.add("challenges__btn");
-    
-    if (ch.type === "online") {
-      btn.textContent = "Take challenge online";
-    } else if (ch.type === "onsite") {
-      btn.textContent = "Book this room";
-    }
+    btn.textContent = type === "online" ? "Take challenge online" : "Book this room";
 
     const icon = document.createElement("img");
-
-    if (ch.type === "online") {
+    if (type === "online") {
       icon.classList.add("challenges__icon__online");
       icon.src = "src/online.png";
       icon.alt = "Online icon";
-    } else if (ch.type === "onsite") {
+    } else if (type === "onsite") {
       icon.classList.add("challenges__icon__onsite");
       icon.src = "src/onsite.png";
       icon.alt = "On-site icon";
@@ -81,9 +101,9 @@ async function loadChallenges() {
     btnDiv.appendChild(icon);
 
     card.append(img, title, participants, ratingDiv, desc, labelsDiv, btnDiv);
-    container.appendChild(card); 
-  }); 
-  
+    container.appendChild(card);
+  });
+
   section.appendChild(container);
   wrapper.appendChild(section);
 }
