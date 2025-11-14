@@ -20,41 +20,25 @@ closeBtn.addEventListener("click", function () {
 
 // ====== ON-SITE CHALLENGES ====== //
 
-// 1. Lista med on-site challenges (mock-data)
 const onsiteChallenges = [
   {
     title: "Title of room (on-site)",
     description:
-      "Protea, ex culpa non invenies unum aut non accusatis unum. Et nihil inuitam. Nemo nocere tibi erit, et non inimicos.",
-    type: "on-site",
-    minParticipants: 2,
-    maxParticipants: 6,
+      "Praeterea, ex culpa non invenies unum aut non accusatis unum. Et nihil inuitam. Nemo nocere tibi erit, et non inimicos, et.",
+    participants: "2-6 participants",
     rating: 4.5,
-    imageUrl: "./src/ESC-hacker.png",
-  },
-  {
-    title: "Title of room (on-site)",
-    description:
-      "Protea, ex culpa non invenies unum aut non accusatis unum. Et nihil inuitam. Nemo nocere tibi erit, et non inimicos.",
-    type: "on-site",
-    minParticipants: 2,
-    maxParticipants: 6,
-    rating: 5,
     imageUrl: "./src/ESC-Teambuild.jpg",
   },
   {
     title: "Title of room (on-site)",
     description:
-      "Protea, ex culpa non invenies unum aut non accusatis unum. Et nihil inuitam. Nemo nocere tibi erit, et non inimicos.",
-    type: "on-site",
-    minParticipants: 2,
-    maxParticipants: 6,
-    rating: 4,
+      "Tollere odium autem in nostra potestate sint, ab omnibus et contra naturam transferre in nobis. Sed interim toto.",
+    participants: "2-6 participants",
+    rating: 4.5,
     imageUrl: "./src/ESC-Teambuild2.jpg",
   },
 ];
 
-// 2. Funktion för att skapa stjärnor för rating
 function createStars(rating) {
   const fullStar = "<span class='rating-star'><img src='./src/checkedRatingStar.png'></span>";
   const emptyStar = "<span class='rating-star-unchecked'><img src='./src/unceckedRatingStar.png'></span>";
@@ -71,10 +55,9 @@ function createStars(rating) {
   return stars;
 }
 
-// 3. Hämta platsen där korten ska visas
 const roomsList = document.querySelector(".card-rooms ul");
+roomsList.innerHTML = "";
 
-// 4. Skapa varje kort dynamiskt
 onsiteChallenges.forEach((room) => {
   const li = document.createElement("li");
   li.innerHTML = `
@@ -84,7 +67,7 @@ onsiteChallenges.forEach((room) => {
         <p class="room-title">${room.title}</p>
         <div class="rating-container">
           <div class="rating-stars">${createStars(room.rating)}</div>
-          <small class="participants">${room.minParticipants}-${room.maxParticipants} participants</small>
+          <small class="participants">${room.participants}</small>
         </div>
         <p class="room-info">${room.description}</p>
         <div class="btn-container">
