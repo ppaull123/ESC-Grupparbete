@@ -13,8 +13,12 @@ const allLabels = [
   "hacking"
 ];
 
-async function loadChallenges() {
+async function loadOnlineChallenges() {
   const challenges = await fetchChallenges(); 
+  
+ 
+  const onlineChallenges = challenges.filter(ch => ch.type === "online");
+  
   const wrapper = document.getElementById("challengesWrapper");
   wrapper.innerHTML = "";
 
@@ -24,13 +28,13 @@ async function loadChallenges() {
   const container = document.createElement("div");
   container.classList.add("challenges__container");
 
-  // ✅ Detect main page
+ 
   const isMainPage = wrapper?.dataset.page === "main";
 
-  // ✅ Sort by rating descending and take top 3 for main page
+  
   const challengesToShow = isMainPage
-    ? [...challenges].sort((a, b) => b.rating - a.rating).slice(0, 3)
-    : challenges;
+    ? [...challenges].sort((a, b) => b.rating - a.rating).slice(0, 3) 
+    : onlineChallenges; 
 
   challengesToShow.forEach(ch => {
     const id = ch.id || 0;
@@ -91,9 +95,11 @@ async function loadChallenges() {
 
     const btn = document.createElement("button");
     btn.classList.add("challenges__btn");
+    
     btn.textContent = type === "online" ? "Take challenge online" : "Book this room";
 
     const icon = document.createElement("img");
+    
     if (type === "online") {
       icon.classList.add("challenges__icon__online");
       icon.src = "src/online.png";
@@ -129,4 +135,4 @@ function renderStars(rating) {
   return stars;
 }
 
-loadChallenges();
+loadOnlineChallenges();
