@@ -13,12 +13,8 @@ const allLabels = [
   "hacking"
 ];
 
-async function loadOnlineChallenges() {
-  const challenges = await fetchChallenges(); 
-  
- 
-  const onlineChallenges = challenges.filter(ch => ch.type === "online");
-  
+async function loadAllChallenges() {
+  const challenges = await fetchChallenges();
   const wrapper = document.getElementById("challengesWrapper");
   wrapper.innerHTML = "";
 
@@ -28,23 +24,27 @@ async function loadOnlineChallenges() {
   const container = document.createElement("div");
   container.classList.add("challenges__container");
 
- 
   const isMainPage = wrapper?.dataset.page === "main";
 
-  
   const challengesToShow = isMainPage
-    ? [...challenges].sort((a, b) => b.rating - a.rating).slice(0, 3) 
-    : onlineChallenges; 
+    ? [...challenges].sort((a, b) => b.rating - a.rating).slice(0, 3)
+    : challenges;
 
   challengesToShow.forEach(ch => {
     const id = ch.id || 0;
     const type = ch.type || "online";
-    const titleText = ch.title || "Untitled Challenge";
-    const description = ch.description || "";
-    const minP = ch.minParticipants || 1;
-    const maxP = ch.maxParticipants || 1;
-    const rating = ch.rating || 0;
-    const image = ch.image; 
+    const titleText =
+      ch.title ||
+      (type === "onsite"
+        ? "Title of room (on-site)"
+        : "Title of room (online)");
+    const description =
+      ch.description ||
+      "Praeterea, ex culpa non invenies unum aut non accusatis unum. Et nihil inuitam. Nemo nocere tibi erit, et non inimicos, et.";
+    const minP = ch.minParticipants || 2;
+    const maxP = ch.maxParticipants || 6;
+    const rating = ch.rating || 4;
+    const image = ch.image || "src/ESC-hacker.png";
     const labels = ch.labels || [];
 
     const combinedLabels = Array.from(new Set([...labels, ...allLabels]));
@@ -66,23 +66,21 @@ async function loadOnlineChallenges() {
     participants.classList.add("challenges__participants");
     participants.textContent = `${minP}–${maxP} participants`;
 
-    const desc = document.createElement("p");
-    desc.classList.add("challenges__description");
-    desc.textContent = description;
-
     const ratingDiv = document.createElement("div");
     ratingDiv.classList.add("challenges__rating");
 
     const starsDiv = document.createElement("div");
     starsDiv.classList.add("challenges__stars");
     starsDiv.innerHTML = renderStars(rating);
-
     ratingDiv.appendChild(starsDiv);
+
+    const desc = document.createElement("p");
+    desc.classList.add("challenges__description");
+    desc.textContent = description;
 
     const labelsDiv = document.createElement("div");
     labelsDiv.classList.add("challenges__labels");
-    labelsDiv.style.display = "none"; 
-
+    labelsDiv.style.display = "none";
     combinedLabels.forEach(label => {
       const span = document.createElement("span");
       span.classList.add("challenges__label");
@@ -95,24 +93,22 @@ async function loadOnlineChallenges() {
 
     const btn = document.createElement("button");
     btn.classList.add("challenges__btn");
-    
-    btn.textContent = type === "online" ? "Take challenge online" : "Book this room";
 
     const icon = document.createElement("img");
-    
+
     if (type === "online") {
+      btn.textContent = "Take challenge online";
       icon.classList.add("challenges__icon__online");
       icon.src = "src/online.png";
       icon.alt = "Online icon";
     } else if (type === "onsite") {
+      btn.textContent = "Book this room";
       icon.classList.add("challenges__icon__onsite");
       icon.src = "src/onsite.png";
       icon.alt = "On-site icon";
     }
 
-    btnDiv.appendChild(btn);
-    btnDiv.appendChild(icon);
-
+    btnDiv.append(btn, icon);
     card.append(img, title, participants, ratingDiv, desc, labelsDiv, btnDiv);
     container.appendChild(card);
   });
@@ -135,4 +131,4 @@ function renderStars(rating) {
   return stars;
 }
 
-loadOnlineChallenges();
+loadAllChallenges();
