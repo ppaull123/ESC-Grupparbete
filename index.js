@@ -17,3 +17,18 @@ closeBtn.addEventListener("click", function () {
     document.querySelector("body").classList.toggle('menu-open');
     document.querySelector("header").classList.toggle('menu-open');
 });
+
+//open filter form
+const challengesFilterButton = document.querySelector('.btn-challengesFilter');
+const filterForm = document.querySelector('.filterForm');
+
+challengesFilterButton.addEventListener('click', () => {
+    filterForm.classList.toggle('filterForm--active');
+})
+
+// add closing button for filter form
+const filterForm__closeBtn = document.querySelector('.filterForm__closeBtn');
+
+filterForm__closeBtn.addEventListener('click', () => {
+    filterForm.classList.toggle('filterForm--active');
+});
