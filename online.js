@@ -1,16 +1,8 @@
 import { fetchChallenges } from "./api.js";
 
 const allLabels = [
-  "web",
-  "coding",
-  "linux",
-  "electronics",
-  "ssh",
-  "ctf",
-  "phreaking",
-  "javascript",
-  "bash",
-  "hacking"
+  "web", "coding", "linux", "electronics", "ssh", "ctf",
+  "phreaking", "javascript", "bash", "hacking"
 ];
 
 async function loadAllChallenges() {
@@ -26,9 +18,14 @@ async function loadAllChallenges() {
 
   const isMainPage = wrapper?.dataset.page === "main";
 
-  const challengesToShow = isMainPage
-    ? [...challenges].sort((a, b) => b.rating - a.rating).slice(0, 3)
-    : challenges;
+  let challengesToShow;
+  if (isMainPage) {
+    const challengesCopy = [...challenges];
+    challengesCopy.sort((a, b) => b.rating - a.rating);
+    challengesToShow = challengesCopy.slice(0, 3);
+  } else {
+    challengesToShow = challenges;
+  }
 
   challengesToShow.forEach(ch => {
     const id = ch.id || 0;
@@ -101,7 +98,7 @@ async function loadAllChallenges() {
       icon.classList.add("challenges__icon__online");
       icon.src = "src/online.png";
       icon.alt = "Online icon";
-    } else if (type === "onsite") {
+    } else {
       btn.textContent = "Book this room";
       icon.classList.add("challenges__icon__onsite");
       icon.src = "src/onsite.png";
