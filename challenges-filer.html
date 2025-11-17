@@ -267,7 +267,7 @@
             <label class="checkbox__label" for="online_challenges">Include online challenges</label>
 
             <input class="checkbox__item on-siteCard" type="checkbox" id="on-site_challenges" name="checkbox"
-                value="on-site">
+                value="onsite">
             <label class="checkbox__label" for="on-site_challenges">Include on-site challenges</label>
         </fieldset>
 
@@ -327,7 +327,11 @@
             <input class="keywordFilter__input" type="text" placeholder="Start typing to filter">
         </fieldset>
     </form>
-            <p class="filterForm__info">No matching challenges</p>
+
+    <p class="filterForm__info">No matching challenges</p>
+<div class="challenges-list">
+
+</div>
 
 
     <script>
@@ -345,9 +349,46 @@
         filterForm__closeBtn.addEventListener('click', () => {
             filterForm.classList.toggle('filterForm--active');
         });
+
+        //API 
+        // export async function fetchChallenges() {
+        async function fetchChallenges() {
+            const userErrorMessage = "Failed to load challenges, please come back later.";
+
+            try {
+                const res = await fetch("https://lernia-sjj-assignments.vercel.app/api/challenges");
+
+                if (!res.ok) throw new Error(userErrorMessage);
+
+                const data = await res.json();
+                return data.challenges;
+            } catch (error) {
+                console.error("Error fetching API:", error);
+                const errorWrapper = document.querySelector(".error__wrapper");
+                if (errorWrapper) {
+                    errorWrapper.textContent = userErrorMessage;
+                }
+                return [];
+            }
+        }
+
+
+        //Filter by CHECKBOX radio button ONLINE vs ONSITE
+        //  HTML-elements
+  const onlineCheckbox = document.querySelector('#online_challenges');
+  const onsiteCheckbox = document.querySelector('#on-site_challenges');
+
+  // ??? how to place cards
+  const outputContainer = document.querySelector('.challenges-list'); 
+
+  // place all
+  let allChallenges = [];
+
+        // fetchChallenges()
+
     </script>
 
-    <script src="./index.js"></script>
+    <!-- <script src="./index.js"></script> -->
 </body>
 
 </html>
