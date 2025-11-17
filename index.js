@@ -18,23 +18,9 @@ closeBtn.addEventListener("click", function () {
     document.querySelector("header").classList.toggle('menu-open');
 });
 
-//Open see all challenges page
+//Open "see all challenges" page
 const seeChallenges = document.querySelector(".section-play-online .btn-teambuilding");
 seeChallenges.addEventListener("click", () => {
     window.location.href = "challenges.html";
 });
 
-//open filter form
-const challengesFilterButton = document.querySelector('.btn-challengesFilter');
-const filterForm = document.querySelector('.filterForm');
-
-challengesFilterButton.addEventListener('click', () => {
-    filterForm.classList.toggle('filterForm--active');
-})
-
-// add closing button for filter form
-const filterForm__closeBtn = document.querySelector('.filterForm__closeBtn');
-
-filterForm__closeBtn.addEventListener('click', () => {
-    filterForm.classList.toggle('filterForm--active');
-});
