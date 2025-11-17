@@ -43,7 +43,80 @@
     <h3 class='heading-challengesPage'>Our challenges</h3>
 
     <button class='btn btn-challengesFilter'>Filter challenges</button>
-    </div>
+    
+
+    <form class="filterForm">
+        <span class="filterForm__closeBtn" aria-label="Close filter">✕</span>
+        <h2 class="filterForm__heading">Filter challenges</h2>
+
+        <fieldset class="checkboxFilter">
+            <legend class="checkboxFilter__heading onlineCard">By type</legend>
+            <input class="checkbox__item" type="checkbox" id="online_challenges" name="checkbox" value="online">
+            <label class="checkbox__label" for="online_challenges">Include online challenges</label>
+
+            <input class="checkbox__item on-siteCard" type="checkbox" id="on-site_challenges" name="checkbox"
+                value="on-site">
+            <label class="checkbox__label" for="on-site_challenges">Include on-site challenges</label>
+        </fieldset>
+
+        <fieldset class="ratingFilter">
+            <legend class="ratingFilter__heading">By rating</legend>
+
+            <div class="ratingFilter__widget" aria-label="Minimum rating">
+                <input class="minRating__input" type="radio" id="min-5" name="minRating" value="5">
+                <label class="minRating__label" for="min-5"></label>
+
+                <input class="minRating__input" type="radio" id="min-4" name="minRating" value="4">
+                <label class="minRating__label" for="min-4"></label>
+
+                <input class="minRating__input" type="radio" id="min-3" name="minRating" value="3">
+                <label class="minRating__label" for="min-3"></label>
+
+                <input class="minRating__input" type="radio" id="min-2" name="minRating" value="2">
+                <label class="minRating__label" for="min-2"></label>
+
+                <input class="minRating__input" type="radio" id="min-1" name="minRating" value="1">
+                <label class="minRating__label" for="min-1"></label>
+            </div>
+
+            <small>to</small>
+
+            <div class="ratingFilter__widget" aria-label="Maximum rating">
+                <input class="maxRating__input" type="radio" id="max-5" name="maxRating" value="5">
+                <label class="maxRating__label" for="max-5"></label>
+
+                <input class="maxRating__input" type="radio" id="max-4" name="maxRating" value="4">
+                <label class="maxRating__label" for="max-4"></label>
+
+                <input class="maxRating__input" type="radio" id="max-3" name="maxRating" value="3">
+                <label class="maxRating__label" for="max-3"></label>
+
+                <input class="maxRating__input" type="radio" id="max-2" name="maxRating" value="2">
+                <label class="maxRating__label" for="max-2"></label>
+
+                <input class="maxRating__input" type="radio" id="max-1" name="maxRating" value="1">
+                <label class="maxRating__label" for="max-1"></label>
+            </div>
+        </fieldset>
+
+        <fieldset class="tagFilter">
+            <legend class="tagFilter__heading">By tag</legend>
+            <ul class="tagFilter__list">
+                <li class="tagFilter_item tag__item--chosen">Linux</li>
+                <li class="tagFilter__item">Webb</li>
+                <li class="tagFilter__item">Cryptography</li>
+                <li class="tagFilter__item">Coding</li>
+            </ul>
+        </fieldset>
+
+        <fieldset class="keywordFilter">
+            <legend class="keywordFilter__heading">Or type to search for keyword</legend>
+            <label class="keywordFilter__label" for="type"></label>
+            <input class="keywordFilter__input" type="text" placeholder="Start typing to filter">
+        </fieldset>
+    </form>
+            <p class="filterForm__info">No matching challenges</p>
+</div>
 
 
 <!--     <div class="card-rooms">
