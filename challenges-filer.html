@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>ESC - Hacker Escape Room</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="./main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Monofett' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        fieldset {
+            border: none;
+        }
+
+        .filterForm {
+            display: none;
+        }
+
+        .filterForm--active {
+            display: block;
+            position: relative;
+            padding: 1rem;
+            font-size: 0.5rem;
+            border: solid 1px silver;
+
+
+        }
+
+        .filterForm--close {
+            display: none;
+
+        }
+
+        @media screen and (min-width: 767px) {
+            .filterForm--active {
+                display: grid;
+                grid-template-columns: 3;
+                grid-template-rows: 3;
+                margin: 1rem;
+            }
+
+            .filterForm__heading {
+                grid-row: 1;
+                grid-column: 1/3;
+            }
+
+        }
+
+        /*CHECKBOX online vs on-site*/
+        .checkboxFilter {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            align-items: center;
+            gap: 0.5rem 0.5rem;
+            padding: 0.5rem;
+            margin: 0;
+        }
+
+        .checkboxFilter__heading {
+            font-weight: 700;
+            padding: 1rem 0 0 0;
+            margin: 0;
+
+        }
+
+        .checkbox__item {
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0;
+            width: 0.3rem;
+            height: 0.3rem;
+        }
+
+        @media screen and (min-width: 767px) {
+            .checkboxFilter {
+                grid-row: 2;
+                grid-column: 1;
+                gap: 0.1em;
+                justify-content: center;
+
+            }
+
+            .checkboxFilter__heading {
+                grid-column: 1/3;
+                grid-row: 1;
+                font-weight: 700;
+            }
+
+            .checkbox__item {
+                grid-column: 1;
+                cursor: pointer;
+                justify-self: left;
+                align-self: top;
+                margin: 0;
+                padding: 0;
+            }
+
+            .checkbox__label {
+                grid-column: 2;
+                justify-self: left;
+                align-self: top;
+                margin-left: 0.2rem;
+                padding: 0;
+
+            }
+        }
+
+
+        /*RATING WIDGET*/
+        .ratingFilter {
+            display: flex;
+            padding: 0.5rem;
+            margin: 0;
+            align-items: baseline;
+        }
+
+        /* stars div */
+        .ratingFilter__widget {
+            padding: 0.5rem;
+            display: inline-flex;
+            gap: 0.1em;
+            /* for showing correct rating value */
+            flex-direction: row-reverse;
+        }
+
+        .ratingFilter__heading {
+            justify-content: left;
+            font-weight: 700;
+            padding: 1rem 0 0 0;
+            margin: 0;
+        }
+
+        /* hide input */
+        .minRating__input,
+        .maxRating__input {
+            display: none;
+        }
+
+        /* empty star */
+        .minRating__label,
+        .maxRating__label {
+            width: 0.5rem;
+            height: 0.5rem;
+            cursor: pointer;
+            background: url('./src/unceckedRatingStar.png') no-repeat center / contain;
+        }
+
+        /* red star */
+        .minRating__input:checked~.minRating__label,
+        .maxRating__input:checked~.maxRating__label,
+        .minRating__label:hover,
+        .minRating__label:hover~.minRating__label,
+        .maxRating__label:hover,
+        .maxRating__label:hover~.maxRating__label {
+            background: url('./src/checkedRatingStar.png') no-repeat center / contain;
+        }
+
+        @media screen and (min-width: 767px) {
+            .ratingFilter {
+                flex-wrap: nowrap;
+                grid-row: 2;
+                grid-column: 2;
+            }
+
+        }
+
+        /*TAG filter*/
+        .tagFilter {
+            /* display: flex; */
+            padding: 0.5rem;
+            margin: 0;
+        }
+
+        .tagFilter__heading {
+            left: 0.5rem;
+            font-weight: 700;
+            padding: 1rem 0 0 0;
+            margin: 0;
+        }
+
+        .tag__list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .tag__item {
+            display: inline-block;
+            gap: 0.5rem;
+
+        }
+
+        @media screen and (min-width: 767px) {
+            .tagFilter {
+                grid-row: 2;
+                grid-column: 3;
+            }
+        }
+
+        /*KEYWORD filter*/
+        .keywordFilter {
+            padding: 0.5rem;
+            margin: 0;
+        }
+
+        .keywordFilter__heading {
+            justify-content: left;
+            font-weight: 700;
+            padding: 1rem 0 0 0;
+            margin: 0;
+        }
+
+        .keyword__input {
+            font-weight: 700;
+            padding: 0.1rem;
+            margin: 0;
+            border: silver 1px solid;
+            height: 1.7em;
+            width: 20em;
+            font-size: large;
+            color: silver;
+        }
+
+        @media screen and (min-width: 767px) {
+            .keywordFilter {
+                grid-row: 3;
+                grid-column: 1/4;
+                justify-self: center;
+            }
+        }
+
+        /*Filter info*/
+
+        .filterForm__info--active {
+            justify-self: center;
+            font-size: 1rem;
+            padding: 0.5rem;
+            margin: 0;
+
+        }
+
+        .filterForm__closeBtn {
+            font-size: 1rem;
+            font-weight: 700;
+            position: fixed;
+            z-index: 5;
+            top: 0.5rem;
+            right: 0.5rem;
+            border: none;
+            background: none;
+        }
+    </style>
+</head>
+
+<body>
+    <button class='btn btn-challengesFilter'>Filter challenges</button>
+    <form class="filterForm">
+        <button class="filterForm__closeBtn" aria-label="Close filter">✕</button>
+        <h2 class="filterForm__heading">Filter challenges</h2>
+
+        <fieldset class="checkboxFilter">
+            <legend class="checkboxFilter__heading onlineCard">By type</legend>
+            <input class="checkbox__item" type="checkbox" id="online_challenges" name="checkbox" value="online">
+            <label class="checkbox__label" for="online_challenges">Include online challenges</label>
+
+            <input class="checkbox__item on-siteCard" type="checkbox" id="on-site_challenges" name="checkbox"
+                value="on-site">
+            <label class="checkbox__label" for="on-site_challenges">Include on-site challenges</label>
+        </fieldset>
+
+        <fieldset class="ratingFilter">
+            <legend class="ratingFilter__heading">By rating</legend>
+
+            <div class="ratingFilter__widget" aria-label="Minimum rating">
+                <input class="minRating__input" type="radio" id="min-5" name="minRating" value="5">
+                <label class="minRating__label" for="min-5"></label>
+
+                <input class="minRating__input" type="radio" id="min-4" name="minRating" value="4">
+                <label class="minRating__label" for="min-4"></label>
+
+                <input class="minRating__input" type="radio" id="min-3" name="minRating" value="3">
+                <label class="minRating__label" for="min-3"></label>
+
+                <input class="minRating__input" type="radio" id="min-2" name="minRating" value="2">
+                <label class="minRating__label" for="min-2"></label>
+
+                <input class="minRating__input" type="radio" id="min-1" name="minRating" value="1">
+                <label class="minRating__label" for="min-1"></label>
+            </div>
+
+            <small>to</small>
+
+            <div class="ratingFilter__widget" aria-label="Maximum rating">
+                <input class="maxRating__input" type="radio" id="max-5" name="maxRating" value="5">
+                <label class="maxRating__label" for="max-5"></label>
+
+                <input class="maxRating__input" type="radio" id="max-4" name="maxRating" value="4">
+                <label class="maxRating__label" for="max-4"></label>
+
+                <input class="maxRating__input" type="radio" id="max-3" name="maxRating" value="3">
+                <label class="maxRating__label" for="max-3"></label>
+
+                <input class="maxRating__input" type="radio" id="max-2" name="maxRating" value="2">
+                <label class="maxRating__label" for="max-2"></label>
+
+                <input class="maxRating__input" type="radio" id="max-1" name="maxRating" value="1">
+                <label class="maxRating__label" for="max-1"></label>
+            </div>
+        </fieldset>
+
+        <fieldset class="tagFilter">
+            <legend class="tagFilter__heading">By tag</legend>
+            <ul class="tagFilter__list">
+                <li class="tagFilter__item tag__item--chosen">Linux</li>
+                <li class="tagFilter__item">Webb</li>
+                <li class="tagFilter__item">Cryptography</li>
+                <li class="tagFilter__item">Coding</li>
+            </ul>
+        </fieldset>
+
+        <fieldset class="keywordFilter">
+            <legend class="keywordFilter__heading">Or type to search for keyword</legend>
+            <label class="keywordFilter__label" for="type"></label>
+            <input class="keywordFilter__input" type="text" placeholder="Start typing to filter">
+        </fieldset>
+    </form>
+            <p class="filterForm__info">No matching challenges</p>
+
+
+    <script>
+        //open filter form
+        const challengesFilterButton = document.querySelector('.btn-challengesFilter');
+        const filterForm = document.querySelector('.filterForm');
+
+        challengesFilterButton.addEventListener('click', () => {
+            filterForm.classList.toggle('filterForm--active');
+        })
+
+        // add closing button for filter form
+        const filterForm__closeBtn = document.querySelector('.filterForm__closeBtn');
+
+        filterForm__closeBtn.addEventListener('click', () => {
+            filterForm.classList.toggle('filterForm--active');
+        });
+    </script>
+
+    <script src="./index.js"></script>
+</body>
+
+</html>
