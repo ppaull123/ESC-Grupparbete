@@ -81,15 +81,15 @@
     background-position: center;
     
     &--filled {
-      background-image: url("src/checkedRatingStar.png");
+      background-image: url("../src/checkedRatingStar.png");
     }
     
     &--empty {
-      background-image: url("src/uncheckedRatingStar.png");
+      background-image: url("../src/uncheckedRatingStar.png");
     }
     
     &--half {
-      background-image: url("src/star-half.png");
+      background-image: url("../src/star-half.png");
     }
   }
   
