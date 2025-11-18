@@ -23,7 +23,7 @@ const seeChallenges = document.querySelector(".section-play-online .btn-teambuil
 seeChallenges.addEventListener("click", () => {
     window.location.href = "challenges.html";
 });
-
+  
 // Modal functionality
 const modal = document.querySelector('.modal-overlay');
 const closeButton = document.querySelector('.modal-close');
@@ -62,7 +62,7 @@ step2NextBtn.addEventListener('click', () => {
     step3.style.display = 'flex';
 });
 
-// Reset modal
+// Reset ruta
 backToChallenges.addEventListener('click', () => {
     modal.classList.add('hidden');
     step1.style.display = 'flex';

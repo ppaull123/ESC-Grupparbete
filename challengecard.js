@@ -154,7 +154,7 @@ step2NextBtn.addEventListener('click', () => {
     step3.style.display = 'flex';
 });
 
-// Reset modal
+// Reset ruta
 backToChallenges.addEventListener('click', () => {
     modal.classList.add('hidden');
     step1.style.display = 'flex';
