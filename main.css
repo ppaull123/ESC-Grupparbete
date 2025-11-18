@@ -1493,7 +1493,7 @@ body {
   padding: 2rem;
   max-width: 100%;
   width: 85%;
-  min-height: 85%;
+  min-height: 75%;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
   position: relative;
 
@@ -1530,18 +1530,10 @@ body {
 .modal-label {
   display: block;
   font-weight: bold;
-  margin-bottom: 0.5rem;
+font-size: xx-large;
+  margin-bottom: 0.1rem;
 }
 
-.modal-input {
-  width: 20%;
-  padding: 0.5rem;
-  font-size: 1rem;
-  border: 2px solid;
-  border-radius: 5px;
-  border-color: rgb(128, 128, 128);
-  margin-bottom: 2rem;
-}
 
 .modal-footer {
   display: flex;
@@ -1555,4 +1547,36 @@ body {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+}
+
+
+#step-1, #step-2, #step-3 {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+
+.modal-input {
+    width: 60%;
+    height: 40px;
+    border: 2px solid #c2cbd3;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    margin-bottom: 1.5rem;
+    max-width: 350px;
+}
+
+
+select.modal-input {
+    height: 45px;
+}
+
+
+#step-3 .modal-title {
+    margin-top: 3rem;
+}
+
+#step-3 a {
+    font-size: 0.6rem;
 }
