@@ -1401,13 +1401,13 @@ fieldset {
   background-position: center;
 }
 .challenges__star--filled {
-  background-image: url("../src/checkedRatingStar.png");
+  background-image: url("./src/checkedRatingStar.png");
 }
 .challenges__star--empty {
-  background-image: url("../src/uncheckedRatingStar.png");
+  background-image: url("./src/uncheckedRatingStar.png");
 }
 .challenges__star--half {
-  background-image: url("../src/star-half.png");
+  background-image: url("./src/star-half.png");
 }
 .challenges__description {
   font-size: 13px;
