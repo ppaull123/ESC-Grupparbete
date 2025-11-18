@@ -18,17 +18,9 @@ closeBtn.addEventListener("click", function () {
     document.querySelector("header").classList.toggle('menu-open');
 });
 
-// modal ruta
-const modal = document.querySelector('.modal-overlay');
-const openButtons = document.querySelectorAll('.btn--book');
-const closeButton = document.querySelector('.modal-close');
-
-openButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    modal.classList.remove('hidden');
-  });
+//Open "see all challenges" page
+const seeChallenges = document.querySelector(".section-play-online .btn-teambuilding");
+seeChallenges.addEventListener("click", () => {
+    window.location.href = "challenges.html";
 });
 
-closeButton.addEventListener('click', () => {
-  modal.classList.add('hidden');
-});

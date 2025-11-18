@@ -1,6 +1,39 @@
 @import 'variables';
 @import 'components';
 
+.heading-challengesPage {
+  font-size: 1.3rem;
+  text-align: center;
+}
+@media (min-width: 1200px) {
+  .heading-challengesPage {
+    font-size: 1rem;
+  }
+}
+
+.btn-challengesFilter {
+  display: inline-block;
+  width: 180px;
+  height: 44px;
+  font-size: 16px;
+  color: $color-secondary;
+  background-color: white;
+  border-color: $color-secondary;
+  border-style: solid;
+  border-radius: 4px;
+}
+@media (min-width: 1200px) {
+  .btn-challengesFilter {
+    width: 180px;
+    height: 45px;
+    font-size: 16px;
+  }
+}
+
+.wrap-filterArea {
+    width: 100%;
+    text-align: center;
+}
 
 .img-container {
     position: relative;
