@@ -4,14 +4,15 @@ const allLabels = [
   "web", "coding", "linux", "electronics", "ssh", "ctf",
   "phreaking", "javascript", "bash", "hacking"
 ];
+let wrapper;
 
-async function loadAllChallenges() {
+async function loadAllChallenges(challengesToRender) {
 
   // 1. Hämta alla challenges från API:t
-  const challenges = await fetchChallenges();
+  const challenges = challengesToRender || await fetchChallenges();
 
   // 2. Hitta elementet i HTML där alla kort ska visas
-  const wrapper = document.getElementById("challengesWrapper");
+  wrapper = document.getElementById("challengesWrapper");
   wrapper.innerHTML = "";
 
   // 3. Skapa en section och container som håller alla kort
@@ -152,3 +153,8 @@ function renderStars(rating) {
 
 // 19. Kör funktionen när sidan laddas
 loadAllChallenges();
+
+export {
+  loadAllChallenges,
+  wrapper
+}
