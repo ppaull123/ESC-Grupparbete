@@ -24,7 +24,7 @@
                 <p class="modal-text">What date would you like to come?</p>
 
                 <label for="booking-date" class="modal-label">Date</label>
-                <input id="booking-date" class="modal-input"/>
+                <input id="booking-date" type="date" class="modal-input"/>
 
                 <div class="modal-footer">
                     <button id="step1-next" class="btn btn--next-step">Search available times</button>
@@ -45,12 +45,13 @@
                 <select id="time-select" class="modal-input"></select>
 
                 <label class="modal-label" for="participant-select">How many participants?</label>
-                <select id="participant-select" class="modal-input"></select>
+                <select id="participant-select" class="modal-input">
+                </select>
 
                 <div class="modal-footer">
                     <button id="step2-next" class="btn btn--next-step">Submit booking</button>
                 </div>
-            </div>
+            </div> 
 
             <!-- Step 3 -->
             <div id="step-3" style="display: none; text-align:center;">

@@ -113,8 +113,57 @@ async function loadAllChallenges() {
     btn.addEventListener("click", () => {
     // Modal öppna
     const modal = document.querySelector(".modal-overlay");
+    
+    // Titlen på rum man valt i Step 1
+    const step1Title = document.querySelector('#step-1 .modal-title');
+    step1Title.textContent = `Book room "${titleText}" (Step 1)`;
+
+    // Uppdatera titeln i Step 2
+    const step2Title = document.querySelector('#step-2 .modal-title');
+    step2Title.textContent = `Book room "${titleText}" (Step 2)`
+
     modal.classList.remove("hidden");
 });
+
+    const icon = document.createElement("img");
+
+    if (type === "online") {
+      btn.textContent = "Take challenge online";
+      icon.classList.add("challenges__icon__online");
+      icon.src = "src/online.png";
+      icon.alt = "Online icon";
+    } else {
+      btn.textContent = "Book this room";
+      icon.classList.add("challenges__icon__onsite");
+      icon.src = "src/onsite.png";
+      icon.alt = "On-site icon";
+    }
+
+    // 16. Lägg ihop allt för kortet
+    btnDiv.append(btn, icon);
+    card.append(img, title, participants, ratingDiv, desc, labelsDiv, btnDiv);
+    container.appendChild(card);
+  });
+
+  // 17. Lägg in allt på sidan
+  section.appendChild(container);
+  wrapper.appendChild(section);
+}
+
+// 18. Funktion för att visa stjärnor baserat på betyg
+function renderStars(rating) {
+  let stars = "";
+  for (let i = 1; i <= 5; i++) {
+    if (i <= Math.floor(rating)) {
+      stars += '<span class="challenges__star challenges__star--filled"></span>';
+    } else if (i === Math.ceil(rating) && rating % 1 !== 0) {
+      stars += '<span class="challenges__star challenges__star--half"></span>';
+    } else {
+      stars += '<span class="challenges__star challenges__star--empty"></span>';
+    }
+  }
+  return stars;
+}
 
 // Modal 
 const modal = document.querySelector('.modal-overlay');
@@ -162,46 +211,6 @@ backToChallenges.addEventListener('click', () => {
     step3.style.display = 'none';
 });
 
-
-    const icon = document.createElement("img");
-
-    if (type === "online") {
-      btn.textContent = "Take challenge online";
-      icon.classList.add("challenges__icon__online");
-      icon.src = "src/online.png";
-      icon.alt = "Online icon";
-    } else {
-      btn.textContent = "Book this room";
-      icon.classList.add("challenges__icon__onsite");
-      icon.src = "src/onsite.png";
-      icon.alt = "On-site icon";
-    }
-
-    // 16. Lägg ihop allt för kortet
-    btnDiv.append(btn, icon);
-    card.append(img, title, participants, ratingDiv, desc, labelsDiv, btnDiv);
-    container.appendChild(card);
-  });
-
-  // 17. Lägg in allt på sidan
-  section.appendChild(container);
-  wrapper.appendChild(section);
-}
-
-// 18. Funktion för att visa stjärnor baserat på betyg
-function renderStars(rating) {
-  let stars = "";
-  for (let i = 1; i <= 5; i++) {
-    if (i <= Math.floor(rating)) {
-      stars += '<span class="challenges__star challenges__star--filled"></span>';
-    } else if (i === Math.ceil(rating) && rating % 1 !== 0) {
-      stars += '<span class="challenges__star challenges__star--half"></span>';
-    } else {
-      stars += '<span class="challenges__star challenges__star--empty"></span>';
-    }
-  }
-  return stars;
-}
 
 // 19. Kör funktionen när sidan laddas
 loadAllChallenges();
