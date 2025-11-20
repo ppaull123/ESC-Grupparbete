@@ -10,6 +10,9 @@ challengesFilterButton.addEventListener('click', () => {
 
 })
 
+const noMatchesInfo = document.querySelector('.filterForm__info');
+const keywordInput = document.querySelector('.keywordFilter__input');
+
 // add closing button for filter form
 const filterForm__closeBtn = document.querySelector('.filterForm__closeBtn');
 
@@ -20,6 +23,8 @@ filterForm__closeBtn.addEventListener('click', async() => {
     try {
         const allChallenges = await fetchChallenges();
         loadAllChallenges(allChallenges);
+        noMatchesInfo.textContent = '';
+        keywordInput.value = '';
     } catch (error) {
         console.error('Error reloading all challenges:', error);
     }
