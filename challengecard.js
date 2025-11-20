@@ -1,3 +1,5 @@
+let allChallenges = [];
+
 import { fetchChallenges } from "./api.js";
 
 const allLabels = [
@@ -8,7 +10,8 @@ const allLabels = [
 async function loadAllChallenges() {
 
   // 1. Hämta alla challenges från API:t
-  const challenges = await fetchChallenges();
+  allChallenges = await fetchChallenges();
+  const challenges = allChallenges;
 
   // 2. Hitta elementet i HTML där alla kort ska visas
   const wrapper = document.getElementById("challengesWrapper");
@@ -113,6 +116,8 @@ async function loadAllChallenges() {
     btn.addEventListener("click", () => {
     // Modal öppna
     const modal = document.querySelector(".modal-overlay");
+
+    modal.dataset.challengeId = id;
     
     // Titlen på rum man valt i Step 1
     const step1Title = document.querySelector('#step-1 .modal-title');
@@ -175,12 +180,6 @@ closeButton.addEventListener('click', () => {
   modal.classList.add('hidden');
 });
 
-// Stäng om man klickar outside
-modal.addEventListener('click', (event) => {
-  if (event.target === modal) {
-    modal.classList.add('hidden');
-  }
-});
 
 // Step 1, 2, 3 
 const step1 = document.getElementById('step-1');
@@ -192,25 +191,149 @@ const step2NextBtn = document.getElementById('step2-next');
 const backToChallenges = document.getElementById('back-to-challenges');
 
 // Step 1 > Step 2
-step1NextBtn.addEventListener('click', () => {
-    step1.style.display = 'none';
-    step2.style.display = 'flex';
+step1NextBtn.addEventListener("click", async () => {
+
+    const modal = document.querySelector(".modal-overlay");
+    const challengeId = modal.dataset.challengeId;
+
+    const dateInput = document.querySelector("#booking-date").value;
+    const timeSelect = document.querySelector("#time-select");
+
+        // Rensa ALLA gamla tider
+    while (timeSelect.firstChild) {
+        timeSelect.removeChild(timeSelect.firstChild);
+    }
+
+    // Kontrollera datum
+    const date = new Date(dateInput);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    if (date < today || !dateInput) {
+        alert("Please select a valid future date.");
+        return;
+    }
+
+    // Formatera datum -> YYYY-MM-DD
+    const formattedDate = date.toISOString().split("T")[0];
+
+    // HÄMTA LEDIGA TIDER
+    const res = await fetch(
+        `https://lernia-sjj-assignments.vercel.app/api/booking/available-times?date=${formattedDate}&challenge=${challengeId}`
+    );
+    const data = await res.json();
+
+if (data.slots && data.slots.length > 0) {
+
+    // 1. Ta bort eventuella dubletter
+    const availableTimes = [...new Set(data.slots)];
+
+    // 2. Fyll dropdown med unika tider
+    availableTimes.forEach(slot => {
+        const option = document.createElement("option");
+        option.value = slot;
+        option.textContent = slot;
+        timeSelect.appendChild(option);
+    });
+
+} else {
+
+    const option = document.createElement("option");
+    option.value = "";
+    option.textContent = "No available times on this date";
+    timeSelect.appendChild(option);
+}
+
+    const participantsSelect = document.querySelector("#participant-select");
+    participantsSelect.innerHTML = "";
+
+    const challenge = allChallenges.find(ch => ch.id == challengeId);
+    const minP = challenge.minParticipants;
+    const maxP = challenge.maxParticipants;
+
+    for (let i = minP; i <= maxP; i++) {
+        const option = document.createElement("option");
+        option.value = i;
+        option.textContent = `${i} participants`;
+        participantsSelect.appendChild(option);
+    }
+
+    // Visa Step 2
+    step1.style.display = "none";
+    step2.style.display = "flex";
 });
 
+
 // Step 2 > Step 3
-step2NextBtn.addEventListener('click', () => {
-    step2.style.display = 'none';
-    step3.style.display = 'flex';
+step2NextBtn.addEventListener("click", async () => {
+
+    const modal = document.querySelector(".modal-overlay");
+    const challengeId = modal.dataset.challengeId;
+
+    const name = document.querySelector("#name").value.trim();
+    const email = document.querySelector("#email").value.trim();
+    const date = document.querySelector("#booking-date").value;
+    const time = document.querySelector("#time-select").value;
+    const participants = document.querySelector("#participant-select").value;
+
+    // Validering
+    if (!name || !email || !time) {
+        alert("Please fill in all fields.");
+        return;
+    }
+
+    const bookingBody = {
+        challenge: Number(challengeId),
+        name,
+        email,
+        date,
+        time,
+        participants: Number(participants)
+    };
+
+    // SKICKA BOKNINGEN TILL API:T
+    const res = await fetch("https://lernia-sjj-assignments.vercel.app/api/booking/reservations", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(bookingBody)
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+        // Visa Step 3
+        step2.style.display = "none";
+        step3.style.display = "flex";
+    } else {
+        alert("Booking failed: " + data.message);
+    }
 });
+
+function resetBookingModal() {
+    // Rensa inputs
+    document.querySelector("#booking-date").value = "";
+    document.querySelector("#name").value = "";
+    document.querySelector("#email").value = "";
+    document.querySelector("#time-select").innerHTML = "";
+    document.querySelector("#participant-select").innerHTML = "";
+
+    // Återställ steps
+    step1.style.display = "flex";
+    step2.style.display = "none";
+    step3.style.display = "none";
+
+    // Stäng modalen
+    modal.classList.add("hidden");
+}
 
 // Reset ruta
 backToChallenges.addEventListener('click', () => {
-    modal.classList.add('hidden');
-    step1.style.display = 'flex';
-    step2.style.display = 'none';
-    step3.style.display = 'none';
+    resetBookingModal();
 });
 
+closeButton.addEventListener('click', () => {
+    resetBookingModal();
+});
 
 // 19. Kör funktionen när sidan laddas
 loadAllChallenges();
