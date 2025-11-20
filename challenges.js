@@ -7,18 +7,27 @@ const filterForm = document.querySelector('.filterForm');
 
 challengesFilterButton.addEventListener('click', () => {
     filterForm.classList.toggle('filterForm--active');
+
 })
 
 // add closing button for filter form
 const filterForm__closeBtn = document.querySelector('.filterForm__closeBtn');
 
-filterForm__closeBtn.addEventListener('click', () => {
-    filterForm.classList.toggle('filterForm--active');
+filterForm__closeBtn.addEventListener('click', async() => {
+    filterForm.classList.remove('filterForm--active');
+    
+    //render all cards after filter form is closed
+    try {
+        const allChallenges = await fetchChallenges();
+        loadAllChallenges(allChallenges);
+    } catch (error) {
+        console.error('Error reloading all challenges:', error);
+    }
 });
 
-const tagList = document.querySelector('.tagFilter__list');
 
 //render labels to filter form from API
+const tagList = document.querySelector('.tagFilter__list');
 async function renderTagsFromAPI() {
     try {
         // get all challenges as objects from API
