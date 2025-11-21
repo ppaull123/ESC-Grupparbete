@@ -23,4 +23,4 @@ const seeChallenges = document.querySelector(".section-play-online .btn-teambuil
 seeChallenges.addEventListener("click", () => {
     window.location.href = "challenges.html";
 });
-
+  
