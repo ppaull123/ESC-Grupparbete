@@ -106,7 +106,7 @@
                 <label class="checkbox__label" for="online_challenges">Include online challenges</label>
 
                 <input class="checkbox__item on-siteCard" type="checkbox" id="on-site_challenges" name="checkbox"
-                    value="on-site">
+                    value="onsite">
                 <label class="checkbox__label" for="on-site_challenges">Include on-site challenges</label>
             </fieldset>
 
@@ -153,10 +153,7 @@
             <fieldset class="tagFilter">
                 <legend class="tagFilter__heading">By tag</legend>
                 <ul class="tagFilter__list">
-                    <li class="tagFilter_item tag__item--chosen">Linux</li>
-                    <li class="tagFilter__item">Webb</li>
-                    <li class="tagFilter__item">Cryptography</li>
-                    <li class="tagFilter__item">Coding</li>
+                    <!-- <li class="tagFilter__item"></li> -->
                 </ul>
             </fieldset>
 
@@ -166,7 +163,7 @@
                 <input class="keywordFilter__input" type="text" placeholder="Start typing to filter">
             </fieldset>
         </form>
-        <p class="filterForm__info">No matching challenges</p>
+        <p class="filterForm__info"></p>
     </div>
 
     <!-- Challenges card -->
@@ -209,8 +206,8 @@
         </div>
     </footer>
 
-
-    <script src="./challenges.js"></script>
+    <script type="module" src="./challenges.js"></script>
+     <script type="module" src="./filter.js"></script>
 
 </body>
 
