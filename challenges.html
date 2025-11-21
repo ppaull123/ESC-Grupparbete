@@ -15,57 +15,6 @@
 </head>
 
 <body>
-<!-- booking rutan -->
-<div class="modal-overlay hidden">
-    <div class="modal">
-        <button class="modal-close">&times;</button>
-
-        <!-- Step 1 -->
-        <div id="step-1">
-            <h2 class="modal-title">Book room "Title of room" (Step 1)</h2>
-            <p class="modal-text">What date would you like to come?</p>
-
-            <label for="booking-date" class="modal-label">Date</label>
-            <input id="booking-date" type="date" class="modal-input"/>
-
-            <div class="modal-footer">
-                <button id="step1-next" class="btn btn--next-step">Search available times</button>
-            </div>
-        </div>
-
-        <!-- Step 2 -->
-        <div id="step-2" style="display: none;">
-            <h2 class="modal-title">Book room "Title of room" (Step 2)</h2>
-
-            <label class="modal-label" for="name">Name</label>
-            <input id="name" class="modal-input" type="text">
-
-            <label class="modal-label" for="email">E-mail</label>
-            <input id="email" class="modal-input" type="email">
-
-            <label class="modal-label" for="time-select">What time?</label>
-            <select id="time-select" class="modal-input"></select>
-
-            <label class="modal-label" for="participant-select">How many participants?</label>
-            <select id="participant-select" class="modal-input"></select>
-
-            <div class="modal-footer">
-                <button id="step2-next" class="btn btn--next-step">Submit booking</button>
-            </div>
-        </div>
-
-        <!-- Step 3 -->
-        <div id="step-3" style="display: none; text-align:center;">
-            <h2 class="modal-title">Thank you!</h2>
-
-            <a href="challenges.html" id="back-to-challenges" style="color:#5a4ff3; text-decoration: underline;">
-                Back to challenges
-            </a>
-        </div>
-
-    </div>
-</div>
-
     <header>
         <div class="header">
             <a href="" class="logo">ESC</a>
@@ -171,6 +120,55 @@
 <ul class="card-rooms" id="challengesWrapper"></ul>
 <script type="module" src="challengecard.js"></script>
 
+<!-- booking rutan -->
+<div class="modal-overlay hidden">
+    <div class="modal">
+        <button class="modal-close">&times;</button>
+
+        <!-- Step 1 -->
+        <div id="step-1">
+            <h2 class="modal-title">Book room "Title of room" (Step 1)</h2>
+            <p class="modal-text">What date would you like to come?</p>
+
+            <label for="booking-date" class="modal-label">Date</label>
+            <input id="booking-date" type="date" class="modal-input"/>
+
+            <div class="modal-footer">
+                <button id="step1-next" class="btn btn--next-step">Search available times</button>
+            </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div id="step-2">
+            <h2 class="modal-title">Book room "Title of room" (Step 2)</h2>
+
+            <label class="modal-label" for="name">Name</label>
+            <input id="name" class="modal-input" type="text">
+
+            <label class="modal-label" for="email">E-mail</label>
+            <input id="email" class="modal-input" type="email">
+
+            <label class="modal-label" for="time-select">What time?</label>
+            <select id="time-select" class="modal-input"></select>
+
+            <label class="modal-label" for="participant-select">How many participants?</label>
+            <select id="participant-select" class="modal-input"></select>
+
+            <div class="modal-footer">
+                <button id="step2-next" class="btn btn--next-step">Submit booking</button>
+            </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div id="step-3">
+            <h2 class="modal-title">Thank you!</h2>
+
+            <a href="challenges.html" id="back-to-challenges">
+                Back to challenges
+            </a>
+        </div>
+    </div>
+</div>
 
     <footer>
         <div class="footer">

@@ -1579,3 +1579,12 @@ select.modal-input {
 #step-3 a {
     font-size: 0.6rem;
 }
+
+#step-2,
+#step-3 {
+    display: none;
+}
+
+#step-3 {
+    text-align: center;
+}
