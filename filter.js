@@ -19,6 +19,12 @@ keywordInput.addEventListener('keydown', (e) => {
         filterAllChallenges();
     }
 });
+minRatingInputs.forEach(input => {
+    input.addEventListener('change', filterAllChallenges);
+});
+maxRatingInputs.forEach(input => {
+    input.addEventListener('change', filterAllChallenges);
+});
 
 //function for ALL FILTERS
 async function filterAllChallenges() {
@@ -28,7 +34,7 @@ async function filterAllChallenges() {
         allChallenges = await fetchChallenges();
     } catch (err) {
         console.error('Error fetching challenges in filterAllChallenges:', err);
-        if (noMatchesInfo) noMatchesInfo.textContent = 'Failed to load challenges.';
+        noMatchesInfo.textContent = 'Failed to load challenges.';
         return;
     }
 
@@ -36,8 +42,11 @@ async function filterAllChallenges() {
     // 1) CHECKBOXES
     const includeOnline = onlineCheckbox.checked;
     const includeOnsite = onsiteCheckbox.checked;
+    // 2) RATING (from min to max)
+    const minRatingChosen = getSelectedRatingValue(minRatingInputs);
+    const maxRatingChosen = getSelectedRatingValue(maxRatingInputs);
     // 4)KEYWORD (from title of description)
-    const keyword = keywordInput.value.trim().toLowerCase();
+    const keywordWritten = keywordInput.value.trim().toLowerCase();
 
     //clear the container before rendring
     wrapper.innerHTML = '';
@@ -46,8 +55,8 @@ async function filterAllChallenges() {
     //calling all filtering functions
     let result = allChallenges;
     result = filterByType(result, includeOnline, includeOnsite);
-    result = filterByKeyword(result, keyword);
-    // result = filterByRating(result, min, max);
+    result = filterByKeyword(result, keywordWritten);
+    result = filterByRating(result, minRatingChosen, maxRatingChosen);
     // result = filterByTags(result, selectedTags);
 
     //if no cards found by filtering, show notice 'No matching challenges'
@@ -74,11 +83,11 @@ function filterByType(challenges, includeOnline, includeOnsite) {
 }
 
 // 4) KEYWORD FILTER function (keyword from title or description) 
-//if input is empty  filter is not applied
-function filterByKeyword(challenges, keyword) {
+//if input is empty  filter is't applied
+function filterByKeyword(challenges, keywordWritten) {
 
-    if (!keyword || keyword.trim() === '') return challenges;
-    const searchKeyword = keyword.toLowerCase().trim();
+    if (!keywordWritten || keywordWritten.trim() === '') return challenges;
+    const searchKeyword = keywordWritten.toLowerCase().trim();
 
     return challenges.filter(card => {
         const title = card.title.toLowerCase().trim();
@@ -86,4 +95,20 @@ function filterByKeyword(challenges, keyword) {
 
         return title.includes(searchKeyword) || description.includes(searchKeyword);
     })
+}
+
+// 2) RATING FILTER (from min till max rating)
+// 2.1) get rating from user and translate into numbers
+function getSelectedRatingValue(radioInputs) {
+    if (!Array.isArray(radioInputs)) return null;
+    const checked = radioInputs.find(radio => radio.checked);
+    if (checked) return Number(checked.value);
+    else return null;
+}
+// 2.2) RATING FILTER function(from min till max rating)
+//if no rating chosen filter isn't applied
+function filterByRating(challenges, minRating, maxRating) {
+    if (!minRating && !maxRating) return challenges;
+
+
 }

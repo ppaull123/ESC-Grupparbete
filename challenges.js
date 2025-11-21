@@ -15,6 +15,7 @@ const keywordInput = document.querySelector('.keywordFilter__input');
 
 // add closing button for filter form
 const filterForm__closeBtn = document.querySelector('.filterForm__closeBtn');
+filterForm__closeBtn.style.cursor = 'pointer';
 
 filterForm__closeBtn.addEventListener('click', async() => {
     filterForm.classList.remove('filterForm--active');
