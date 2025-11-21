@@ -82,6 +82,42 @@ function filterByType(challenges, includeOnline, includeOnsite) {
     });
 }
 
+// 2) RATING FILTER (from min till max rating)
+// 2.1) get rating from user and translate into numbers
+function getSelectedRatingValue(radioInputs) {
+    if (!Array.isArray(radioInputs)) return null;
+    const checked = radioInputs.find(radio => radio.checked);
+    if (checked) return Number(checked.value);
+    else return null;
+}
+// 2.2) RATING FILTER function(from min till max rating)
+//if no rating chosen filter isn't applied
+function filterByRating(challenges, minRating, maxRating) {
+   let min;
+    if (minRating == null) min = null;
+    else min = Number(minRating);
+
+    let max;
+    if (maxRating == null) max = null;
+    else max = Number(maxRating);
+
+    if (min === null && max === null) return challenges;
+
+    //if in API not a number
+    if (Number.isNaN(min) || Number.isNaN(max)) return [];
+
+    //if min > max
+    if (min != null && max != null && min > max) return [];
+    //all other cases
+    return challenges.filter(card => {
+        const rating = Number(card.rating) || 0;
+        if (min !== null && max !== null) return rating >= min && rating <= max;
+        if (min !== null) return rating >= min;
+        if (max !== null) return rating <= max;
+        return true;
+    });
+}
+
 // 4) KEYWORD FILTER function (keyword from title or description) 
 //if input is empty  filter is't applied
 function filterByKeyword(challenges, keywordWritten) {
@@ -95,20 +131,4 @@ function filterByKeyword(challenges, keywordWritten) {
 
         return title.includes(searchKeyword) || description.includes(searchKeyword);
     })
-}
-
-// 2) RATING FILTER (from min till max rating)
-// 2.1) get rating from user and translate into numbers
-function getSelectedRatingValue(radioInputs) {
-    if (!Array.isArray(radioInputs)) return null;
-    const checked = radioInputs.find(radio => radio.checked);
-    if (checked) return Number(checked.value);
-    else return null;
-}
-// 2.2) RATING FILTER function(from min till max rating)
-//if no rating chosen filter isn't applied
-function filterByRating(challenges, minRating, maxRating) {
-    if (!minRating && !maxRating) return challenges;
-
-
 }
