@@ -12,6 +12,7 @@ async function loadAllChallenges(challengesToRender) {
 
   // 1. Hämta alla challenges från API:t
   const challenges = challengesToRender || await fetchChallenges();
+  allChallenges = challenges;
 
   // 2. Hitta elementet i HTML där alla kort ska visas
   wrapper = document.getElementById("challengesWrapper");
