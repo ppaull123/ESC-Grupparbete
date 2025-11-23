@@ -1,14 +1,14 @@
 import { fetchChallenges } from "./api.js";
 import { wrapper, loadAllChallenges } from "./challengecard.js";
-import { tagList } from "./challenges.js";
+import { tagList, noMatchesInfo } from "./challenges.js";
 
 //find elements in the filter form
 const onlineCheckbox = document.querySelector('#online_challenges');
 const onsiteCheckbox = document.querySelector('#on-site_challenges');
-const minRatingInputs = Array.from(document.querySelectorAll('input[name="minRating"]'));
-const maxRatingInputs = Array.from(document.querySelectorAll('input[name="maxRating"]'));
+const minRatingInputs = Array.from(document.querySelectorAll('.minRating__input'));
+const maxRatingInputs = Array.from(document.querySelectorAll('.maxRating__input'));
 const keywordInput = document.querySelector('.keywordFilter__input');
-const noMatchesInfo = document.querySelector('.filterForm__info');
+// const noMatchesInfo = document.querySelector('.filterForm__info');
 
 //add EventListeners to all filters
 onlineCheckbox.addEventListener('change', filterAllChallenges);
@@ -91,9 +91,8 @@ function getSelectedRatingValue(radioInputs) {
     else return null;
 }
 // 2.2) RATING FILTER function(from min till max rating)
-//if no rating chosen filter isn't applied
 function filterByRating(challenges, minRating, maxRating) {
-   let min;
+    let min;
     if (minRating == null) min = null;
     else min = Number(minRating);
 
@@ -101,18 +100,22 @@ function filterByRating(challenges, minRating, maxRating) {
     if (maxRating == null) max = null;
     else max = Number(maxRating);
 
+    //if no rating chosen filter isn't applied
     if (min === null && max === null) return challenges;
 
-    //if in API not a number
+    //if rating in API not a number no cards rendered
     if (Number.isNaN(min) || Number.isNaN(max)) return [];
-
-    //if min > max
+    //if min > max no cards rendered
     if (min != null && max != null && min > max) return [];
+
     //all other cases
     return challenges.filter(card => {
         const rating = Number(card.rating) || 0;
+        //min < rating < max
         if (min !== null && max !== null) return rating >= min && rating <= max;
+        //only min rating is marked
         if (min !== null) return rating >= min;
+        //only max rating is marked
         if (max !== null) return rating <= max;
         return true;
     });
