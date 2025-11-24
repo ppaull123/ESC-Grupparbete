@@ -87,3 +87,30 @@ function filterByKeyword(challenges, keyword) {
         return title.includes(searchKeyword) || description.includes(searchKeyword);
     })
 }
+
+// Run once on page load
+window.addEventListener("load", () => {
+    applyHashFilter();
+});
+
+// Run every time the hash changes (menu clicks, links)
+window.addEventListener("hashchange", () => {
+    applyHashFilter();
+});
+
+// Function to check the hash and apply the correct filter
+function applyHashFilter() {
+    const hash = window.location.hash;
+
+    if (hash === "#online") {
+        onlineCheckbox.checked = true;   // Turn on online filter
+        onsiteCheckbox.checked = false;  // Turn off on-site filter
+        filterAllChallenges();           // Run filtering
+    }
+
+    if (hash === "#onsite") {
+        onsiteCheckbox.checked = true;   
+        onlineCheckbox.checked = false;  
+        filterAllChallenges();           
+    }
+}
