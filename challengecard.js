@@ -12,6 +12,7 @@ async function loadAllChallenges(challengesToRender) {
 
   // 1. Hämta alla challenges från API:t
   const challenges = challengesToRender || await fetchChallenges();
+  allChallenges = challenges;
 
   // 2. Hitta elementet i HTML där alla kort ska visas
   wrapper = document.getElementById("challengesWrapper");
@@ -53,7 +54,7 @@ async function loadAllChallenges(challengesToRender) {
       "Praeterea, ex culpa non invenies unum aut non accusatis unum. Et nihil inuitam. Nemo nocere tibi erit, et non inimicos, et.";
     const minP = ch.minParticipants || 2;
     const maxP = ch.maxParticipants || 6;
-    const rating = ch.rating || 4;
+    const rating = ch.rating || 0;
     const image = ch.image || "src/ESC-hacker.png";
     const labels = ch.labels || [];
 
@@ -114,21 +115,21 @@ async function loadAllChallenges(challengesToRender) {
     btn.classList.add("challenges__btn");
 
     btn.addEventListener("click", () => {
-    // Modal öppna
-    const modal = document.querySelector(".modal-overlay");
+      // Modal öppna
+      const modal = document.querySelector(".modal-overlay");
 
-    modal.dataset.challengeId = id;
-    
-    // Titlen på rum man valt i Step 1
-    const step1Title = document.querySelector('#step-1 .modal-title');
-    step1Title.textContent = `Book room "${titleText}" (Step 1)`;
+      modal.dataset.challengeId = id;
 
-    // Uppdatera titeln i Step 2
-    const step2Title = document.querySelector('#step-2 .modal-title');
-    step2Title.textContent = `Book room "${titleText}" (Step 2)`
+      // Titlen på rum man valt i Step 1
+      const step1Title = document.querySelector('#step-1 .modal-title');
+      step1Title.textContent = `Book room "${titleText}" (Step 1)`;
 
-    modal.classList.remove("hidden");
-});
+      // Uppdatera titeln i Step 2
+      const step2Title = document.querySelector('#step-2 .modal-title');
+      step2Title.textContent = `Book room "${titleText}" (Step 2)`
+
+      modal.classList.remove("hidden");
+    });
 
     const icon = document.createElement("img");
 
@@ -193,146 +194,146 @@ const backToChallenges = document.getElementById('back-to-challenges');
 // Step 1 > Step 2
 step1NextBtn.addEventListener("click", async () => {
 
-    const modal = document.querySelector(".modal-overlay");
-    const challengeId = modal.dataset.challengeId;
+  const modal = document.querySelector(".modal-overlay");
+  const challengeId = modal.dataset.challengeId;
 
-    const dateInput = document.querySelector("#booking-date").value;
-    const timeSelect = document.querySelector("#time-select");
+  const dateInput = document.querySelector("#booking-date").value;
+  const timeSelect = document.querySelector("#time-select");
 
-        // Rensa ALLA gamla tider
-    while (timeSelect.firstChild) {
-        timeSelect.removeChild(timeSelect.firstChild);
-    }
+  // Rensa ALLA gamla tider
+  while (timeSelect.firstChild) {
+    timeSelect.removeChild(timeSelect.firstChild);
+  }
 
-    // Kontrollera datum
-    const date = new Date(dateInput);
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+  // Kontrollera datum
+  const date = new Date(dateInput);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
 
-    if (date < today || !dateInput) {
-        alert("Please select a valid future date.");
-        return;
-    }
+  if (date < today || !dateInput) {
+    alert("Please select a valid future date.");
+    return;
+  }
 
-    // Formatera datum -> YYYY-MM-DD
-    const formattedDate = date.toISOString().split("T")[0];
+  // Formatera datum -> YYYY-MM-DD
+  const formattedDate = date.toISOString().split("T")[0];
 
-    // HÄMTA LEDIGA TIDER
-    const res = await fetch(
-        `https://lernia-sjj-assignments.vercel.app/api/booking/available-times?date=${formattedDate}&challenge=${challengeId}`
-    );
-    const data = await res.json();
+  // HÄMTA LEDIGA TIDER
+  const res = await fetch(
+    `https://lernia-sjj-assignments.vercel.app/api/booking/available-times?date=${formattedDate}&challenge=${challengeId}`
+  );
+  const data = await res.json();
 
-if (data.slots && data.slots.length > 0) {
+  if (data.slots && data.slots.length > 0) {
 
     // 1. Ta bort eventuella dubletter
     const availableTimes = [...new Set(data.slots)];
 
     // 2. Fyll dropdown med unika tider
     availableTimes.forEach(slot => {
-        const option = document.createElement("option");
-        option.value = slot;
-        option.textContent = slot;
-        timeSelect.appendChild(option);
+      const option = document.createElement("option");
+      option.value = slot;
+      option.textContent = slot;
+      timeSelect.appendChild(option);
     });
 
-} else {
+  } else {
 
     const option = document.createElement("option");
     option.value = "";
     option.textContent = "No available times on this date";
     timeSelect.appendChild(option);
-}
+  }
 
-    const participantsSelect = document.querySelector("#participant-select");
-    participantsSelect.innerHTML = "";
+  const participantsSelect = document.querySelector("#participant-select");
+  participantsSelect.innerHTML = "";
 
-    const challenge = allChallenges.find(ch => ch.id == challengeId);
-    const minP = challenge.minParticipants;
-    const maxP = challenge.maxParticipants;
+  const challenge = allChallenges.find(ch => ch.id == challengeId);
+  const minP = challenge.minParticipants;
+  const maxP = challenge.maxParticipants;
 
-    for (let i = minP; i <= maxP; i++) {
-        const option = document.createElement("option");
-        option.value = i;
-        option.textContent = `${i} participants`;
-        participantsSelect.appendChild(option);
-    }
+  for (let i = minP; i <= maxP; i++) {
+    const option = document.createElement("option");
+    option.value = i;
+    option.textContent = `${i} participants`;
+    participantsSelect.appendChild(option);
+  }
 
-    // Visa Step 2
-    step1.style.display = "none";
-    step2.style.display = "flex";
+  // Visa Step 2
+  step1.style.display = "none";
+  step2.style.display = "flex";
 });
 
 
 // Step 2 > Step 3
 step2NextBtn.addEventListener("click", async () => {
 
-    const modal = document.querySelector(".modal-overlay");
-    const challengeId = modal.dataset.challengeId;
+  const modal = document.querySelector(".modal-overlay");
+  const challengeId = modal.dataset.challengeId;
 
-    const name = document.querySelector("#name").value.trim();
-    const email = document.querySelector("#email").value.trim();
-    const date = document.querySelector("#booking-date").value;
-    const time = document.querySelector("#time-select").value;
-    const participants = document.querySelector("#participant-select").value;
+  const name = document.querySelector("#name").value.trim();
+  const email = document.querySelector("#email").value.trim();
+  const date = document.querySelector("#booking-date").value;
+  const time = document.querySelector("#time-select").value;
+  const participants = document.querySelector("#participant-select").value;
 
-    // Validering
-    if (!name || !email || !time) {
-        alert("Please fill in all fields.");
-        return;
-    }
+  // Validering
+  if (!name || !email || !time) {
+    alert("Please fill in all fields.");
+    return;
+  }
 
-    const bookingBody = {
-        challenge: Number(challengeId),
-        name,
-        email,
-        date,
-        time,
-        participants: Number(participants)
-    };
+  const bookingBody = {
+    challenge: Number(challengeId),
+    name,
+    email,
+    date,
+    time,
+    participants: Number(participants)
+  };
 
-    // SKICKA BOKNINGEN TILL API:T
-    const res = await fetch("https://lernia-sjj-assignments.vercel.app/api/booking/reservations", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(bookingBody)
-    });
+  // SKICKA BOKNINGEN TILL API:T
+  const res = await fetch("https://lernia-sjj-assignments.vercel.app/api/booking/reservations", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(bookingBody)
+  });
 
-    const data = await res.json();
+  const data = await res.json();
 
-    if (res.ok) {
-        // Visa Step 3
-        step2.style.display = "none";
-        step3.style.display = "flex";
-    } else {
-        alert("Booking failed: " + data.message);
-    }
+  if (res.ok) {
+    // Visa Step 3
+    step2.style.display = "none";
+    step3.style.display = "flex";
+  } else {
+    alert("Booking failed: " + data.message);
+  }
 });
 
 function resetBookingModal() {
-    // Rensa inputs
-    document.querySelector("#booking-date").value = "";
-    document.querySelector("#name").value = "";
-    document.querySelector("#email").value = "";
-    document.querySelector("#time-select").innerHTML = "";
-    document.querySelector("#participant-select").innerHTML = "";
+  // Rensa inputs
+  document.querySelector("#booking-date").value = "";
+  document.querySelector("#name").value = "";
+  document.querySelector("#email").value = "";
+  document.querySelector("#time-select").innerHTML = "";
+  document.querySelector("#participant-select").innerHTML = "";
 
-    // Återställ steps
-    step1.style.display = "flex";
-    step2.style.display = "none";
-    step3.style.display = "none";
+  // Återställ steps
+  step1.style.display = "flex";
+  step2.style.display = "none";
+  step3.style.display = "none";
 
-    // Stäng modalen
-    modal.classList.add("hidden");
+  // Stäng modalen
+  modal.classList.add("hidden");
 }
 
 // Reset ruta
 backToChallenges.addEventListener('click', () => {
-    resetBookingModal();
+  resetBookingModal();
 });
 
 closeButton.addEventListener('click', () => {
-    resetBookingModal();
+  resetBookingModal();
 });
 
 // 19. Kör funktionen när sidan laddas
