@@ -1,6 +1,6 @@
 import { fetchChallenges } from "./api.js";
-import { wrapper, loadAllChallenges } from "./challengecard.js";
-import { tagList } from "./challenges.js";
+import { wrapper, loadAllChallenges, allLabels } from "./challengecard.js";
+
 
 //find elements in the filter form
 const onlineCheckbox = document.querySelector('#online_challenges');
@@ -9,6 +9,8 @@ const minRatingInputs = Array.from(document.querySelectorAll('input[name="minRat
 const maxRatingInputs = Array.from(document.querySelectorAll('input[name="maxRating"]'));
 const keywordInput = document.querySelector('.keywordFilter__input');
 const noMatchesInfo = document.querySelector('.filterForm__info');
+const tagFilterList = document.querySelector(".tagFilter__list");
+const tags = allLabels;
 
 //add EventListeners to all filters
 onlineCheckbox.addEventListener('change', filterAllChallenges);
@@ -25,6 +27,33 @@ minRatingInputs.forEach(input => {
 maxRatingInputs.forEach(input => {
     input.addEventListener('change', filterAllChallenges);
 });
+
+let selectedTags = [];
+
+tags.forEach(tag => {
+    const li = document.createElement("li");
+    li.textContent = tag;
+    li.classList.add("tagFilter__item");
+
+    li.addEventListener("click", () => {
+        toggleTag(tag, li);
+        filterAllChallenges();
+    });
+
+    tagFilterList.appendChild(li);
+});
+
+function toggleTag(tag, element) {
+    if(selectedTags.includes(tag)) {
+        selectedTags = selectedTags.filter(t => t !== tag);
+        element.classList.remove("tagFilter__item--selected");
+    }
+    else {
+        selectedTags.push(tag);
+        element.classList.add("tagFilter__item--selected");
+    }
+}
+
 
 //function for ALL FILTERS
 async function filterAllChallenges() {
@@ -57,7 +86,7 @@ async function filterAllChallenges() {
     result = filterByType(result, includeOnline, includeOnsite);
     result = filterByKeyword(result, keywordWritten);
     result = filterByRating(result, minRatingChosen, maxRatingChosen);
-    // result = filterByTags(result, selectedTags);
+    result = filterByTags(result, selectedTags);
 
     //if no cards found by filtering, show notice 'No matching challenges'
     if (result.length === 0) {
@@ -131,4 +160,13 @@ function filterByKeyword(challenges, keywordWritten) {
 
         return title.includes(searchKeyword) || description.includes(searchKeyword);
     })
+}
+
+function filterByTags(challenges, selectedTags) {
+    if(!selectedTags.length)
+        return challenges;
+
+    return challenges.filter(challenge =>
+        challenge.labels && selectedTags.every(tag => challenge.labels.includes(tag))
+    )
 }

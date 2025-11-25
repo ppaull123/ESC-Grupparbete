@@ -2,7 +2,7 @@ let allChallenges = [];
 
 import { fetchChallenges } from "./api.js";
 
-const allLabels = [
+export const allLabels = [
   "web", "coding", "linux", "electronics", "ssh", "ctf",
   "phreaking", "javascript", "bash", "hacking"
 ];
@@ -59,7 +59,7 @@ async function loadAllChallenges(challengesToRender) {
     const labels = ch.labels || [];
 
     // 7. Kombinera labels från API:t med alla standardetiketter
-    const combinedLabels = Array.from(new Set([...labels, ...allLabels]));
+    const combinedLabels = labels || [];
 
     // 8. Skapa strukturen för varje challenge-kort
     const card = document.createElement("article");

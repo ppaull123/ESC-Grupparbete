@@ -212,10 +212,30 @@ fieldset {
 }
 
 
-/*Filter info*/
+/* tags filter styling*/
 .filterForm__info--active {
     justify-self: center;
     font-size: 1rem;
     padding: 0.5rem;
     margin: 0;
+}
+
+.tagFilter__item {
+    display: inline-block;
+    padding: 6px 12px;
+    margin: 4px;
+    border-radius: 20px;
+    background-color: white;
+    cursor: pointer;
+    border: 2px solid #3b3737;
+}
+
+.tagFilter__item:hover {
+    background-color: #3b3737;
+    color: white;
+}
+
+.tagFilter__item--selected {
+    background-color: #3b3737;
+    color: white;
 }

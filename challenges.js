@@ -32,7 +32,7 @@ filterForm__closeBtn.addEventListener('click', async () => {
     }
 });
 
-
+/*
 //render labels to filter form from API
 const tagList = document.querySelector('.tagFilter__list');
 async function renderTagsFromAPI() {
@@ -93,4 +93,4 @@ async function renderTagsFromAPI() {
 }
 renderTagsFromAPI();
 
-export { tagList }
+export { tagList }*/
