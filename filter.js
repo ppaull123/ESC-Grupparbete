@@ -1,16 +1,14 @@
 import { fetchChallenges } from "./api.js";
-import { wrapper, loadAllChallenges, allLabels } from "./challengecard.js";
-
+import { wrapper, loadAllChallenges } from "./challengecard.js";
+import { tagList } from "./challenges.js";
 
 //find elements in the filter form
 const onlineCheckbox = document.querySelector('#online_challenges');
 const onsiteCheckbox = document.querySelector('#on-site_challenges');
-const minRatingInputs = Array.from(document.querySelectorAll('input[name="minRating"]'));
-const maxRatingInputs = Array.from(document.querySelectorAll('input[name="maxRating"]'));
+const minRatingInputs = Array.from(document.querySelectorAll('.minRating__input'));
+const maxRatingInputs = Array.from(document.querySelectorAll('.maxRating__input'));
 const keywordInput = document.querySelector('.keywordFilter__input');
 const noMatchesInfo = document.querySelector('.filterForm__info');
-const tagFilterList = document.querySelector(".tagFilter__list");
-const tags = allLabels;
 
 //add EventListeners to all filters
 onlineCheckbox.addEventListener('change', filterAllChallenges);
@@ -27,33 +25,6 @@ minRatingInputs.forEach(input => {
 maxRatingInputs.forEach(input => {
     input.addEventListener('change', filterAllChallenges);
 });
-
-let selectedTags = [];
-
-tags.forEach(tag => {
-    const li = document.createElement("li");
-    li.textContent = tag;
-    li.classList.add("tagFilter__item");
-
-    li.addEventListener("click", () => {
-        toggleTag(tag, li);
-        filterAllChallenges();
-    });
-
-    tagFilterList.appendChild(li);
-});
-
-function toggleTag(tag, element) {
-    if(selectedTags.includes(tag)) {
-        selectedTags = selectedTags.filter(t => t !== tag);
-        element.classList.remove("tagFilter__item--selected");
-    }
-    else {
-        selectedTags.push(tag);
-        element.classList.add("tagFilter__item--selected");
-    }
-}
-
 
 //function for ALL FILTERS
 async function filterAllChallenges() {
@@ -120,9 +91,8 @@ function getSelectedRatingValue(radioInputs) {
     else return null;
 }
 // 2.2) RATING FILTER function(from min till max rating)
-//if no rating chosen filter isn't applied
 function filterByRating(challenges, minRating, maxRating) {
-   let min;
+    let min;
     if (minRating == null) min = null;
     else min = Number(minRating);
 
@@ -130,18 +100,22 @@ function filterByRating(challenges, minRating, maxRating) {
     if (maxRating == null) max = null;
     else max = Number(maxRating);
 
+    //if no rating chosen filter isn't applied
     if (min === null && max === null) return challenges;
 
-    //if in API not a number
+    //if rating in API not a number no cards rendered
     if (Number.isNaN(min) || Number.isNaN(max)) return [];
-
-    //if min > max
+    //if min > max no cards rendered
     if (min != null && max != null && min > max) return [];
+
     //all other cases
     return challenges.filter(card => {
         const rating = Number(card.rating) || 0;
+        //min < rating < max
         if (min !== null && max !== null) return rating >= min && rating <= max;
+        //only min rating is marked
         if (min !== null) return rating >= min;
+        //only max rating is marked
         if (max !== null) return rating <= max;
         return true;
     });
@@ -160,13 +134,4 @@ function filterByKeyword(challenges, keywordWritten) {
 
         return title.includes(searchKeyword) || description.includes(searchKeyword);
     })
-}
-
-function filterByTags(challenges, selectedTags) {
-    if(!selectedTags.length)
-        return challenges;
-
-    return challenges.filter(challenge =>
-        challenge.labels && selectedTags.every(tag => challenge.labels.includes(tag))
-    )
 }

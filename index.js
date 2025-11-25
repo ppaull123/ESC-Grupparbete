@@ -23,4 +23,22 @@ const seeChallenges = document.querySelector(".section-play-online .btn-teambuil
 seeChallenges.addEventListener("click", () => {
     window.location.href = "challenges.html";
 });
-  
+//  ONLINE BUTTONS 
+const onlineBtns = document.querySelectorAll(".btn--online");
+
+onlineBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+        // Go to challenges page and set hash to #online
+        window.location.href = "challenges.html#online";
+    });
+});
+
+//  ON-SITE BUTTONS 
+const onsiteBtns = document.querySelectorAll(".btn--onSite");
+
+onsiteBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+        // Go to challenges page and set hash to #onsite
+        window.location.href = "challenges.html#onsite";
+    });
+});
