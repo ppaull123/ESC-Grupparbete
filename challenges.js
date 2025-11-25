@@ -5,10 +5,8 @@ import { wrapper, loadAllChallenges } from "./challengecard.js"
 const challengesFilterButton = document.querySelector('.btn-challengesFilter');
 const filterForm = document.querySelector('.filterForm');
 
-
 challengesFilterButton.addEventListener('click', () => {
     filterForm.classList.toggle('filterForm--active');
-
 })
 
 const noMatchesInfo = document.querySelector('.filterForm__info');

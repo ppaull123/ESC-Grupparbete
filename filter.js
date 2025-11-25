@@ -169,3 +169,30 @@ function filterByTags(challenges, selectedTags) {
         selectedTags.every(tag => challenge.labels.includes(tag))
     );
 }
+
+// Run once on page load
+window.addEventListener("load", () => {
+    applyHashFilter();
+});
+
+// Run every time the hash changes (menu clicks, links)
+window.addEventListener("hashchange", () => {
+    applyHashFilter();
+});
+
+// Function to check the hash and apply the correct filter
+function applyHashFilter() {
+    const hash = window.location.hash;
+
+    if (hash === "#online") {
+        onlineCheckbox.checked = true;
+        onsiteCheckbox.checked = false;
+        filterAllChallenges();
+    }
+
+    if (hash === "#onsite") {
+        onsiteCheckbox.checked = true;   
+        onlineCheckbox.checked = false;  
+        filterAllChallenges();           
+    }
+}

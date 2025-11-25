@@ -1364,7 +1364,7 @@ fieldset {
   width: 0.5rem;
   height: 0.5rem;
   cursor: pointer;
-  background: url("./src/unceckedRatingStar.png") no-repeat center/contain;
+  background: url("./src/uncheckedRatingStar.png") no-repeat center/contain;
 }
 
 /* red star */
