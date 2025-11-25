@@ -26,6 +26,41 @@ maxRatingInputs.forEach(input => {
     input.addEventListener('change', filterAllChallenges);
 });
 
+//cancel rating filter with the second click on same star
+//add custom data-attribute wasChecked to mark a checked star
+document.querySelectorAll('.minRating__input, .maxRating__input').forEach(input => {
+    input.dataset.wasChecked = input.checked ? 'true' : 'false';
+});
+
+document.querySelectorAll('.minRating__input, .maxRating__input')
+    .forEach(input => {
+        input.addEventListener('click', function () {
+            //define group min or max
+            const group = this.classList.contains('minRating__input')
+                ? document.querySelectorAll('.minRating__input')
+                : document.querySelectorAll('.maxRating__input');
+
+            if (this.dataset.wasChecked === 'true') {
+                //cancel chosen group with the second click
+                group.forEach(input => {
+                    input.checked = false;
+                    input.dataset.wasChecked = 'false';
+                    //inform parent eventListener that applies filter abt change of status of chosen star 
+                    input.dispatchEvent(new Event('change', { bubbles: true }));
+                });
+            } else {
+                //update wasChecked status for the newly selected star
+                group.forEach(input => {
+                    input.checked = false;
+                    input.dataset.wasChecked = 'false';
+                });
+                this.checked = true;
+                this.dataset.wasChecked = 'true';
+                this.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+        });
+    });
+
 //function for ALL FILTERS
 async function filterAllChallenges() {
     //get all cards from API
