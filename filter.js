@@ -185,7 +185,6 @@ function filterByKeyword(challenges, keywordWritten) {
         card.description.toLowerCase().includes(keywordWritten)
     );
 }
-<<<<<<< HEAD
 
 function filterByTags(challenges, selectedTags) {
     if (!selectedTags.length) return challenges;
@@ -222,5 +221,3 @@ function applyHashFilter() {
         filterAllChallenges();           
     }
 }
-=======
->>>>>>> origin/Paul
