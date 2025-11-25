@@ -1,5 +1,4 @@
 import { fetchChallenges } from "./api.js";
-<<<<<<< HEAD
 import { wrapper, loadAllChallenges, allLabels } from "./challengecard.js";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -11,29 +10,8 @@ function initFilter() {
     if (!allLabels || allLabels.length === 0) {
         setTimeout(initFilter, 50);
         return;
-=======
-import { wrapper, loadAllChallenges } from "./challengecard.js";
-import { tagList } from "./challenges.js";
-
-//find elements in the filter form
-const onlineCheckbox = document.querySelector('#online_challenges');
-const onsiteCheckbox = document.querySelector('#on-site_challenges');
-const minRatingInputs = Array.from(document.querySelectorAll('.minRating__input'));
-const maxRatingInputs = Array.from(document.querySelectorAll('.maxRating__input'));
-const keywordInput = document.querySelector('.keywordFilter__input');
-const noMatchesInfo = document.querySelector('.filterForm__info');
-
-//add EventListeners to all filters
-onlineCheckbox.addEventListener('change', filterAllChallenges);
-onsiteCheckbox.addEventListener('change', filterAllChallenges);
-keywordInput.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-        e.preventDefault();
-        filterAllChallenges();
->>>>>>> origin/Paul
     }
 
-<<<<<<< HEAD
     setupElements();
     setupTagFilter();
     setupListeners();
@@ -110,9 +88,6 @@ function setupListeners() {
 }
 
 // ALLA FILTER-FUNKTIONER
-=======
-//function for ALL FILTERS
->>>>>>> origin/Paul
 async function filterAllChallenges() {
     let allChallenges = [];
 
