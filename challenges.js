@@ -5,10 +5,8 @@ import { wrapper, loadAllChallenges } from "./challengecard.js"
 const challengesFilterButton = document.querySelector('.btn-challengesFilter');
 const filterForm = document.querySelector('.filterForm');
 
-
 challengesFilterButton.addEventListener('click', () => {
     filterForm.classList.toggle('filterForm--active');
-
 })
 
 const noMatchesInfo = document.querySelector('.filterForm__info');
@@ -37,10 +35,10 @@ filterForm__closeBtn.addEventListener('click', async () => {
 const tagList = document.querySelector('.tagFilter__list');
 async function renderTagsFromAPI() {
     try {
-        // get all challenges as objects from API
+        //get all challenges as objects from API
         const challenges = await fetchChallenges();
 
-        // pick up unique tags ("label" from API)
+        //pick up unique tags ("label" from API)
         const tagsSet = new Set();
         for (const ch of challenges) {
             const labels = ch.labels || [];
@@ -48,9 +46,7 @@ async function renderTagsFromAPI() {
                 tagsSet.add(String(label));
             }
         }
-
         //clear <ul class="tagFilter__list"> before rendering tags
-        if (tagList) {
             tagList.innerHTML = '';
 
             //render tags (text) in the filter form
@@ -86,11 +82,12 @@ async function renderTagsFromAPI() {
                     tagList.appendChild(space);
                 }
             });
-        }
     } catch (error) {
         console.error('Error loading tags:', error);
     }
 }
 renderTagsFromAPI();
 
-export { tagList }
+export { tagList,
+    noMatchesInfo
+ }
