@@ -12,35 +12,6 @@ let selectedTags = [];
 let tagFilterList = document.querySelector(".tagFilter__list");
 
 
-//Setup for tags
-function setupTagFilter() {
-    if (!tagFilterList) return;
-
-    tagFilterList.innerHTML = "";
-
-    allLabels.forEach(tag => {
-        const li = document.createElement("li");
-        li.textContent = tag;
-        li.classList.add("tagFilter__item");
-
-        li.addEventListener("click", () => {
-            toggleTag(tag, li);
-            filterAllChallenges();
-        });
-
-        tagFilterList.appendChild(li);
-    });
-}
-
-function toggleTag(tag, element) {
-    if (selectedTags.includes(tag)) {
-        selectedTags = selectedTags.filter(t => t !== tag);
-        element.classList.remove("tagFilter__item--selected");
-    } else {
-        selectedTags.push(tag);
-        element.classList.add("tagFilter__item--selected");
-    }
-}
 
 //add EventListeners to all filters
 onlineCheckbox.addEventListener('change', filterAllChallenges);
@@ -92,7 +63,6 @@ document.querySelectorAll('.minRating__input, .maxRating__input')
             }
         });
     });
-
 
 //function for ALL FILTERS
 async function filterAllChallenges() {
@@ -159,7 +129,6 @@ function getSelectedRatingValue(radioInputs) {
     else return null;
 }
 
-
 // 2.2) RATING FILTER function(from min till max rating)
 function filterByRating(challenges, minRating, maxRating) {
     let min;
@@ -191,6 +160,46 @@ function filterByRating(challenges, minRating, maxRating) {
     });
 }
 
+// 3) TAG FILTER
+// 3.1) create a tag list in the Filter form
+function setupTagFilter() {
+    if (!tagFilterList) return;
+
+    tagFilterList.innerHTML = "";
+
+    allLabels.forEach(tag => {
+        const li = document.createElement("li");
+        li.textContent = tag;
+        li.classList.add("tagFilter__item");
+        //get user's input
+        li.addEventListener("click", () => {
+            toggleTag(tag, li);
+            filterAllChallenges();
+        });
+
+        tagFilterList.appendChild(li);
+    });
+}
+// 3.2) apply styles to chosen tags
+function toggleTag(tag, element) {
+    if (selectedTags.includes(tag)) {
+        selectedTags = selectedTags.filter(t => t !== tag);
+        element.classList.remove("tagFilter__item--selected");
+    } else {
+        selectedTags.push(tag);
+        element.classList.add("tagFilter__item--selected");
+    }
+}
+//3.3)if no tags chosen filter isn't applied
+// cards only matched with all selected tags will be visible
+function filterByTags(challenges, selectedTags) {
+    if (!selectedTags.length) return challenges;
+    return challenges.filter(challenge =>
+        challenge.labels &&
+        selectedTags.every(tag => challenge.labels.includes(tag))
+    );
+}
+
 // 4) KEYWORD FILTER function (keyword from title or description) 
 //if input is empty  filter is't applied
 function filterByKeyword(challenges, keyword) {
@@ -203,17 +212,6 @@ function filterByKeyword(challenges, keyword) {
         return title.includes(searchKeyword) || description.includes(searchKeyword);
     });
 }
-
-// funtion for tags
-// cards only matched with all selected tags will be visible
-function filterByTags(challenges, selectedTags) {
-    if (!selectedTags.length) return challenges;
-    return challenges.filter(challenge =>
-        challenge.labels &&
-        selectedTags.every(tag => challenge.labels.includes(tag))
-    );
-}
-
 
 // Run once on page load
 window.addEventListener("load", () => {
