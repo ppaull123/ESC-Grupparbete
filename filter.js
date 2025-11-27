@@ -1,6 +1,5 @@
 import { fetchChallenges } from "./api.js";
-import { wrapper, loadAllChallenges } from "./challengecard.js";
-import { tagList, noMatchesInfo } from "./challenges.js";
+import { wrapper, loadAllChallenges, allLabels } from "./challengecard.js";
 
 //find elements in the filter form
 const onlineCheckbox = document.querySelector('#online_challenges');
@@ -8,7 +7,40 @@ const onsiteCheckbox = document.querySelector('#on-site_challenges');
 const minRatingInputs = Array.from(document.querySelectorAll('.minRating__input'));
 const maxRatingInputs = Array.from(document.querySelectorAll('.maxRating__input'));
 const keywordInput = document.querySelector('.keywordFilter__input');
-// const noMatchesInfo = document.querySelector('.filterForm__info');
+const noMatchesInfo = document.querySelector('.filterForm__info');
+let selectedTags = [];
+let tagFilterList = document.querySelector(".tagFilter__list");
+
+
+//Setup for tags
+function setupTagFilter() {
+    if (!tagFilterList) return;
+
+    tagFilterList.innerHTML = "";
+
+    allLabels.forEach(tag => {
+        const li = document.createElement("li");
+        li.textContent = tag;
+        li.classList.add("tagFilter__item");
+
+        li.addEventListener("click", () => {
+            toggleTag(tag, li);
+            filterAllChallenges();
+        });
+
+        tagFilterList.appendChild(li);
+    });
+}
+
+function toggleTag(tag, element) {
+    if (selectedTags.includes(tag)) {
+        selectedTags = selectedTags.filter(t => t !== tag);
+        element.classList.remove("tagFilter__item--selected");
+    } else {
+        selectedTags.push(tag);
+        element.classList.add("tagFilter__item--selected");
+    }
+}
 
 //add EventListeners to all filters
 onlineCheckbox.addEventListener('change', filterAllChallenges);
@@ -61,6 +93,7 @@ document.querySelectorAll('.minRating__input, .maxRating__input')
         });
     });
 
+
 //function for ALL FILTERS
 async function filterAllChallenges() {
     //get all cards from API
@@ -83,7 +116,7 @@ async function filterAllChallenges() {
     // 4)KEYWORD (from title of description)
     const keywordWritten = keywordInput.value.trim().toLowerCase();
 
-    //clear the container before rendring
+    //clear the container before rendering
     wrapper.innerHTML = '';
     noMatchesInfo.textContent = '';
 
@@ -92,7 +125,7 @@ async function filterAllChallenges() {
     result = filterByType(result, includeOnline, includeOnsite);
     result = filterByKeyword(result, keywordWritten);
     result = filterByRating(result, minRatingChosen, maxRatingChosen);
-    // result = filterByTags(result, selectedTags);
+    result = filterByTags(result, selectedTags);
 
     //if no cards found by filtering, show notice 'No matching challenges'
     if (result.length === 0) {
@@ -125,6 +158,8 @@ function getSelectedRatingValue(radioInputs) {
     if (checked) return Number(checked.value);
     else return null;
 }
+
+
 // 2.2) RATING FILTER function(from min till max rating)
 function filterByRating(challenges, minRating, maxRating) {
     let min;
@@ -158,21 +193,31 @@ function filterByRating(challenges, minRating, maxRating) {
 
 // 4) KEYWORD FILTER function (keyword from title or description) 
 //if input is empty  filter is't applied
-function filterByKeyword(challenges, keywordWritten) {
-
-    if (!keywordWritten || keywordWritten.trim() === '') return challenges;
-    const searchKeyword = keywordWritten.toLowerCase().trim();
+function filterByKeyword(challenges, keyword) {
+    if (!keyword || keyword.trim() === '') return challenges;
+    const searchKeyword = keyword.toLowerCase().trim();
 
     return challenges.filter(card => {
         const title = card.title.toLowerCase().trim();
         const description = card.description.toLowerCase().trim();
-
         return title.includes(searchKeyword) || description.includes(searchKeyword);
-    })
+    });
 }
+
+// funtion for tags
+// cards only matched with all selected tags will be visible
+function filterByTags(challenges, selectedTags) {
+    if (!selectedTags.length) return challenges;
+    return challenges.filter(challenge =>
+        challenge.labels &&
+        selectedTags.every(tag => challenge.labels.includes(tag))
+    );
+}
+
 
 // Run once on page load
 window.addEventListener("load", () => {
+    setupTagFilter();
     applyHashFilter();
 });
 
@@ -192,8 +237,8 @@ function applyHashFilter() {
     }
 
     if (hash === "#onsite") {
-        onsiteCheckbox.checked = true;   
-        onlineCheckbox.checked = false;  
-        filterAllChallenges();           
+        onsiteCheckbox.checked = true;
+        onlineCheckbox.checked = false;
+        filterAllChallenges();
     }
 }
