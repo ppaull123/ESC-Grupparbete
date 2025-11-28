@@ -169,6 +169,10 @@
   .challenges__stars {
     transform: translateY(-200px);
   }
+
+   @media (min-width: $bp-desktop) {
+    justify-content: center;
+  }
 }
 
 #challengesWrapper[data-page="main"] .challenges__card {
@@ -176,3 +180,5 @@
   max-width: 320px;
   scroll-snap-align: start;
 }
+
+ 
