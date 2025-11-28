@@ -37,7 +37,7 @@
 @media (min-width: 1200px) {
   .buttons--2 {
     transform: translateX(0);
-    padding: 85px 0;
+    padding: 0 0 85px 0;
   }
 }
 
@@ -416,7 +416,7 @@ header.menu-open {
 @media (min-width: 1200px) {
   .buttons--2 {
     transform: translateX(0);
-    padding: 85px 0;
+    padding: 0 0 85px 0;
   }
 }
 
@@ -729,7 +729,7 @@ header.menu-open {
 @media (min-width: 1200px) {
   .challenges-headline {
     font-size: 1rem;
-    margin-bottom: 100px;
+    margin-bottom: 0;
   }
 }
 
@@ -1462,7 +1462,7 @@ fieldset {
 }
 
 .challenges {
-  padding: 40px 20px;
+  padding: 0 20px 40px;
   max-width: 1280px;
   margin: 0 auto;
   overflow: hidden;
@@ -1585,6 +1585,36 @@ fieldset {
   position: absolute;
   top: 15px;
   right: 15px;
+}
+
+#challengesWrapper[data-page=main] .challenges__container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  overflow-x: auto;
+  gap: 0;
+  padding: 0 20px;
+  overflow-x: auto;
+  min-height: 480px;
+  scrollbar-width: none;
+}
+@media (min-width: 767px) {
+  #challengesWrapper[data-page=main] .challenges__container {
+    justify-content: center;
+  }
+}
+#challengesWrapper[data-page=main] .challenges__container .challenges__card {
+  min-height: 400px;
+  margin-right: 40px;
+}
+#challengesWrapper[data-page=main] .challenges__container .challenges__stars {
+  transform: translateY(-200px);
+}
+
+#challengesWrapper[data-page=main] .challenges__card {
+  flex: 0 0 85%;
+  max-width: 320px;
+  scroll-snap-align: start;
 }
 
 html,
