@@ -277,36 +277,44 @@ step2NextBtn.addEventListener("click", async () => {
   const time = document.querySelector("#time-select").value;
   const participants = document.querySelector("#participant-select").value;
 
-  // Validering
-  if (!name || !email || !time) {
+  // added regex check, for valid email format
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+  // validation for name, email and time
+  switch (true) {
+  case (!name || !email || !time):
+
     alert("Please fill in all fields.");
-    return;
-  }
+    break;
 
-  const bookingBody = {
-    challenge: Number(challengeId),
-    name,
-    email,
-    date,
-    time,
-    participants: Number(participants)
-  };
+  // validate email - if an @ and proper email format
+  case (!emailRegex.test(email)):
 
-  // SKICKA BOKNINGEN TILL API:T
-  const res = await fetch("https://lernia-sjj-assignments.vercel.app/api/booking/reservations", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(bookingBody)
-  });
+    alert('You must enter a valid email address');
+    break;
 
-  const data = await res.json();
+    default:
 
-  if (res.ok) {
-    // Visa Step 3
-    step2.style.display = "none";
-    step3.style.display = "flex";
-  } else {
-    alert("Booking failed: " + data.message);
+      const bookingBody = {
+        challenge: Number(challengeId), name, email, date, time, participants: Number(participants)
+      };
+
+      // SKICKA BOKNINGEN TILL API:T
+      const res = await fetch("https://lernia-sjj-assignments.vercel.app/api/booking/reservations", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(bookingBody)
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        // Visa Step 3
+        step2.style.display = "none";
+        step3.style.display = "flex";
+      } else {
+        alert("Booking failed: " + data.message);
+      }
   }
 });
 
