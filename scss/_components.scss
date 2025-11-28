@@ -51,6 +51,7 @@
     font-weight: bold;
     font-size: 24px;
     border: none;
+    cursor: pointer;
 
     &--online {
         background: none;
@@ -176,6 +177,7 @@
     font-size: 24px;
     margin-left: 10px;
     margin-bottom: 35px;
+    cursor: pointer;
 
     @media (min-width: $bp-medium) {
         font-size: 0.4rem;

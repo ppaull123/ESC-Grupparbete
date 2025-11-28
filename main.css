@@ -48,6 +48,7 @@
   font-weight: bold;
   font-size: 24px;
   border: none;
+  cursor: pointer;
 }
 .btn--online {
   background: none;
@@ -178,6 +179,7 @@
   font-size: 24px;
   margin-left: 10px;
   margin-bottom: 35px;
+  cursor: pointer;
 }
 @media (min-width: 767px) {
   .btn-teambuilding {
@@ -427,6 +429,7 @@ header.menu-open {
   font-weight: bold;
   font-size: 24px;
   border: none;
+  cursor: pointer;
 }
 .btn--online {
   background: none;
@@ -557,6 +560,7 @@ header.menu-open {
   font-size: 24px;
   margin-left: 10px;
   margin-bottom: 35px;
+  cursor: pointer;
 }
 @media (min-width: 767px) {
   .btn-teambuilding {
