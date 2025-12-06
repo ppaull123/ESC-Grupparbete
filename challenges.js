@@ -24,7 +24,12 @@ filterForm__closeBtn.addEventListener('click', async () => {
         const allChallenges = await fetchChallenges();
         loadAllChallenges(allChallenges);
         noMatchesInfo.textContent = '';
+        //reset tags
+         document.querySelectorAll('.tagFilter__item--selected').forEach(item => {
+        item.classList.remove('tagFilter__item--selected');
+         //reset all other inputs
         filterForm.reset();
+    });
     } catch (error) {
         console.error('Error reloading all challenges:', error);
     }
