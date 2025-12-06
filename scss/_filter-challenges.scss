@@ -24,7 +24,15 @@ fieldset {
         @media screen and (min-width: $bp-medium) {
             display: grid;
             grid-template-columns: 1fr auto 1fr;
-            // grid-template-rows: 3;
+        }
+
+        /*Filter form as modal on mobiles*/
+        @media (max-width: $bp-medium) {
+            position: fixed;
+            inset: 10px;
+            transform: none;
+            background-color: white;
+            z-index: 50;
         }
     }
 
