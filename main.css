@@ -1164,6 +1164,24 @@ select.modal-input {
   text-align: center;
 }
 
+.container-about {
+  width: 70%;
+  text-align: left;
+  margin: 0 auto;
+  font-size: 0.8rem;
+  margin-top: 60px;
+  margin-bottom: 60px;
+}
+
+.aboutus-image {
+  width: 100%;
+  padding-top: 40px;
+}
+
+.heading-about {
+  font-size: 1rem;
+}
+
 footer {
   background-color: #011827;
   color: white;
