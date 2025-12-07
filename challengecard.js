@@ -95,6 +95,17 @@ async function loadAllChallenges(challengesToRender) {
     const desc = document.createElement("p");
     desc.classList.add("challenges__description");
     desc.textContent = description;
+    desc.textContent = shortenDescription(description);
+
+    function shortenDescription(description, maxLeanght = 50) {
+  if (description.length <= maxLeanght)
+    return description;
+
+  const cutDescription = description.slice(0, maxLeanght);
+  const lastSpace = cutDescription.lastIndexOf(" ");
+
+  return description.slice(0, lastSpace) + "...";
+}
 
     // 14. Etiketter (labels)
     const labelsDiv = document.createElement("div");
