@@ -97,6 +97,16 @@ async function loadAllChallenges(challengesToRender) {
     desc.textContent = description;
     desc.textContent = shortenDescription(description);
 
+    function shortenDescription(description, maxLeanght = 50) {
+  if (description.length <= maxLeanght)
+    return description;
+
+  const cutDescription = description.slice(0, maxLeanght);
+  const lastSpace = cutDescription.lastIndexOf(" ");
+
+  return description.slice(0, lastSpace) + "...";
+}
+
     // 14. Etiketter (labels)
     const labelsDiv = document.createElement("div");
     labelsDiv.classList.add("challenges__labels");
@@ -344,16 +354,6 @@ backToChallenges.addEventListener('click', () => {
 closeButton.addEventListener('click', () => {
   resetBookingModal();
 });
-
-function shortenDescription(description, maxLeanght = 50) {
-  if (description.length <= maxLeanght)
-    return description;
-
-  const cutDescription = description.slice(0, maxLeanght);
-  const lastSpace = cutDescription.lastIndexOf(" ");
-
-  return description.slice(0, lastSpace) + "...";
-}
 
 // 19. Kör funktionen när sidan laddas
 loadAllChallenges();
