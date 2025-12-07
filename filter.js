@@ -206,6 +206,9 @@ function filterByKeyword(challenges, keyword) {
     if (!keyword || keyword.trim() === '') return challenges;
     const searchKeyword = keyword.toLowerCase().trim();
 
+    //if user enters less then 3 signs in the input - all the cards are shown
+    if (searchKeyword.length < 3) return challenges;
+
     return challenges.filter(card => {
         const title = card.title.toLowerCase().trim();
         const description = card.description.toLowerCase().trim();
