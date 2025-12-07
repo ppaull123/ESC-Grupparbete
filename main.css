@@ -621,7 +621,8 @@ header.menu-open {
   width: 100%;
   height: auto;
   max-height: 274px;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   margin-bottom: 20px;
 }
 @media (min-width: 1200px) {
@@ -828,7 +829,8 @@ header.menu-open {
   .card-rooms .img-room {
     width: 100%;
     height: auto;
-    object-fit: cover;
+    -o-object-fit: cover;
+       object-fit: cover;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
   }
@@ -875,7 +877,8 @@ header.menu-open {
   .card-rooms .img-room {
     width: 363px;
     height: 219px;
-    object-fit: cover;
+    -o-object-fit: cover;
+       object-fit: cover;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
   }
@@ -998,7 +1001,8 @@ header.menu-open {
   .teambuilding img {
     width: 100%;
     height: auto;
-    object-fit: cover;
+    -o-object-fit: cover;
+       object-fit: cover;
   }
 }
 @media (min-width: 1200px) {
@@ -1529,8 +1533,10 @@ fieldset {
 .challenges__image {
   width: 100%;
   height: 200px;
-  object-fit: cover;
-  object-position: center;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
   display: block;
 }
 .challenges__rating {
@@ -1643,6 +1649,168 @@ fieldset {
   scroll-snap-align: start;
 }
 
+.contact-hero {
+  padding: 3rem 1rem;
+  text-align: center;
+  background: linear-gradient(180deg, rgba(3, 37, 63, 0.1), rgba(3, 37, 63, 0));
+  color: #011827;
+}
+.contact-hero .challenges-headline {
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  animation: fadeInUp 1s ease forwards;
+}
+.contact-hero .story-bio {
+  color: #011827;
+  max-width: 760px;
+  margin: 0.25rem auto 0;
+  font-size: 1rem;
+  animation: fadeInUp 1.2s ease forwards;
+}
+
+.contact-section {
+  padding: 3rem 1rem 4rem;
+  background: #f9f9f9;
+}
+.contact-section .contact-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.contact-section .contact-form {
+  flex: 1 1 500px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  border-left: 5px solid #E3170A;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.contact-section .contact-form:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+.contact-section .contact-form label {
+  display: block;
+  margin: 0.5rem 0 0.2rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #011827;
+  transition: color 0.3s;
+}
+.contact-section .contact-form input,
+.contact-section .contact-form textarea {
+  width: 100%;
+  padding: 12px 10px;
+  border: 1px solid #B6BDB5;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  margin-bottom: 0.8rem;
+  box-sizing: border-box;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.contact-section .contact-form input:focus,
+.contact-section .contact-form textarea:focus {
+  border-color: #E3170A;
+  box-shadow: 0 0 8px rgba(227, 23, 10, 0.4);
+  outline: none;
+}
+.contact-section .contact-form textarea {
+  resize: vertical;
+  min-height: 150px;
+}
+.contact-section .contact-form .btn {
+  background: #E3170A;
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: all 0.3s ease;
+}
+.contact-section .contact-form .btn:hover {
+  background: rgb(178.1518987342, 18.0506329114, 7.8481012658);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.contact-section .contact-form .label-optional {
+  font-weight: 400;
+  color: #011827;
+  font-size: 0.85rem;
+}
+.contact-section .contact-info {
+  flex: 0 0 320px;
+  font-size: 0.95rem;
+}
+.contact-section .contact-info > div {
+  background: #e8f0fe;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.contact-section .contact-info > div:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+.contact-section .contact-info h3 {
+  margin-top: 0;
+  font-size: 1.1rem;
+}
+.contact-section .contact-info p {
+  margin: 0.5rem 0;
+}
+.contact-section .contact-info a {
+  color: #E3170A;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.contact-section .contact-info a:hover {
+  color: rgb(153.7278481013, 15.5759493671, 6.7721518987);
+}
+
+@media (min-width: 768px) {
+  .contact-hero .challenges-headline {
+    font-size: 2.2rem;
+  }
+  .contact-form {
+    padding: 2.5rem;
+  }
+}
+@media (max-width: 520px) {
+  .contact-hero {
+    padding: 1.5rem 1rem;
+  }
+  .contact-hero .challenges-headline {
+    font-size: 1.5rem;
+  }
+  .contact-form {
+    padding: 1.5rem;
+    font-size: 0.95rem;
+  }
+  .contact-container {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 html,
 body {
   font-size: clamp(24px, 3.5vw, 40px);
@@ -1658,4 +1826,4 @@ body {
   body {
     max-height: 100vh;
   }
-}
+}/*# sourceMappingURL=main.css.map */

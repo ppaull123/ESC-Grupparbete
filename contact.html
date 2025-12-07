@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>ESC - Hacker Escape Room</title>
+     <meta name="description"
+        content="A meeting place where a team of friends can chose a quiz with a hacker theme">
+    <!--meta-tags for social media-->
+    <meta property="og:title" content="ESC - Hacker Escape Room">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="Challenges with a hacker theme">
+    <meta property="og:url" content="https://ppaull123.github.io/ESC-Grupparbete/">  
+     <meta property="og:image" content="https://ppaull123.github.io/ESC-Grupparbete/src/ESC-hacker.png">
+    
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="./main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Monofett' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+    <header>
+        <div class="header">
+            <a href="index.html" class="logo">ESC</a>
+            <h1 class="head-title">Hacker Escape Rooms</h1>
+        </div>
+
+        <button class="openMenu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav>
+            <a class="closeBtn"></a>
+            <ul class="nav-menuContent">
+                <li class="play-online"><a href="challenges.html#online">Play online</a></li>
+                <li class="play-onsite"><a href="challenges.html#onsite">Play on-site</a></li>
+                <li class="the-story"><a href="">The story</a></li>
+                <li class="contact-us"><a href="contact.html">Contact us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="contact-hero">
+            <h2 class="challenges-headline">Contact Us</h2>
+            <p class="story-bio">Have a question or want to book an experience? Send us a message and we'll get back to you shortly.</p>
+        </section>
+
+        <section class="contact-section">
+            <div class="contact-container">
+                <form class="contact-form" action="#" method="post">
+                    <label for="contact-name">Name</label>
+                    <input id="contact-name" name="name" type="text" placeholder="Your name" required>
+
+                    <label for="contact-email">Email</label>
+                    <input id="contact-email" name="email" type="email" placeholder="you@example.com" required>
+
+                    <label for="contact-subject">Subject <span class="label-optional">(optional)</span></label>
+                    <input id="contact-subject" name="subject" type="text" placeholder="Subject (optional)">
+
+                    <label for="contact-message">Message</label>
+                    <textarea id="contact-message" name="message" rows="8" placeholder="Write your message here" required></textarea>
+
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+
+                <aside class="contact-info">
+                    <div>
+                        <h3>Contact information</h3>
+                        <p class="footer-text">If you prefer, contact us directly using the details below.</p>
+                        <p><strong>Address</strong><br>ESC Hacker Escape Room<br>12th Street<br>Stockholm</p>
+                        <p><strong>Phone</strong><br><a href="tel:+46123456789">+46 12 345 6789</a></p>
+                        <p><strong>Email</strong><br><a href="mailto:info@esc-hacker.example">info@esc-hacker.example</a></p>
+                        <p class="contact-hours">Opening hours:<br>Mon–Fri 10:00–18:00</p>
+                    </div>
+                </aside>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer">
+            <section class="footer-about">
+                <p class="footer-sitename">[ESC] Hacker Escape Room</p>
+                <p class="footer-text">Quodsi haberent magnalia inter potentiam et divitias,
+                    et non illam quidem haec eo spectant haec quoque vos omnino desit
+                    illud quo solo felicitatis libertatisque perficiuntur.</p>
+            </section>
+
+            <section class="footer-links">
+                <p class="footer-links-heading">Site map</p>
+                <ul>
+                    <li><a href="">The Story</a></li>
+                    <li><a href="contact.html">Contact us</a></li>
+                    <li><a href="">Legal</a></li>
+                </ul>
+
+                <ul>
+                    <li><a href="challenges.html#online">Play online</a></li>
+                    <li><a href="challenges.html#onsite">Play on-site</a></li>
+                </ul>
+            </section>
+
+            <section class="footer-socials">
+                <p class="footer-socials-heading">Follow us on</p>
+                <ul>
+                    <li><a href="">Facebook</a></li>
+                    <li><a href="">Instagram</a></li>
+                    <li><a href="">Twitter</a></li>
+                </ul>
+            </section>
+        </div>
+    </footer>
+
+    <!-- Popup efter pressing send -->
+    <script>
+        const form = document.querySelector(".contact-form");
+
+        form.onsubmit = function () {
+            const name = document.getElementById("contact-name").value;
+            const email = document.getElementById("contact-email").value;
+
+            if (name && email) {
+                alert("Thanks for contacting us!");
+                form.reset(); // clears the form
+            } else {
+                alert("Please fill in your name and email!");
+            }
+
+            return false; // prevent form from submitting/refreshing
+        }
+    </script>
+</body>
+
+</html>
