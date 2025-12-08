@@ -17,6 +17,11 @@ body {
     background-color: white;
 }
 
+a:hover,
+a.active {
+    color: $color-secondary;
+}
+
 @media (min-width: $bp-desktop) {
 
     html,
