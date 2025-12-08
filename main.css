@@ -82,12 +82,12 @@
 }
 .btn--onSite {
   background-color: #8ACFE5;
-  color: #011827;
+  color: #021928;
 }
 @media (min-width: 767px) {
   .btn--onSite {
     background-color: #8ACFE5;
-    color: #011827;
+    color: #021928;
     text-decoration: none;
     font-size: 16px;
     margin: 0;
@@ -98,7 +98,7 @@
 @media (min-width: 1200px) {
   .btn--onSite {
     background-color: #8ACFE5;
-    color: #011827;
+    color: #021928;
     text-decoration: none;
     font-size: 24px;
     margin: 0;
@@ -200,7 +200,7 @@ header {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  background-color: #011827;
+  background-color: #021928;
   color: white;
   padding: 5px 10px;
 }
@@ -225,7 +225,7 @@ header .openMenu span {
   header {
     display: block;
     font-size: 0.6rem;
-    background-color: #011827;
+    background-color: #021928;
     color: white;
     padding: 10px 20px;
   }
@@ -237,7 +237,7 @@ header .openMenu span {
   header {
     display: block;
     font-size: 0.6rem;
-    background-color: #011827;
+    background-color: #021928;
     color: white;
     padding: 10px 20px;
   }
@@ -330,7 +330,7 @@ header .header .head-title {
   nav {
     position: fixed;
     inset: 0;
-    background: #011827;
+    background: #021928;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -463,12 +463,12 @@ header.menu-open {
 }
 .btn--onSite {
   background-color: #8ACFE5;
-  color: #011827;
+  color: #021928;
 }
 @media (min-width: 767px) {
   .btn--onSite {
     background-color: #8ACFE5;
-    color: #011827;
+    color: #021928;
     text-decoration: none;
     font-size: 16px;
     margin: 0;
@@ -479,7 +479,7 @@ header.menu-open {
 @media (min-width: 1200px) {
   .btn--onSite {
     background-color: #8ACFE5;
-    color: #011827;
+    color: #021928;
     text-decoration: none;
     font-size: 24px;
     margin: 0;
@@ -909,7 +909,7 @@ header.menu-open {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #011827;
+  background-color: #021928;
   color: white;
   width: 100%;
   height: 500px;
@@ -1187,7 +1187,7 @@ select.modal-input {
 }
 
 footer {
-  background-color: #011827;
+  background-color: #021928;
   color: white;
 }
 footer .footer {
@@ -1653,7 +1653,7 @@ fieldset {
   padding: 3rem 1rem;
   text-align: center;
   background: linear-gradient(180deg, rgba(3, 37, 63, 0.1), rgba(3, 37, 63, 0));
-  color: #011827;
+  color: #021928;
 }
 .contact-hero .challenges-headline {
   margin-bottom: 0.5rem;
@@ -1663,7 +1663,7 @@ fieldset {
   animation: fadeInUp 1s ease forwards;
 }
 .contact-hero .story-bio {
-  color: #011827;
+  color: #021928;
   max-width: 760px;
   margin: 0.25rem auto 0;
   font-size: 1rem;
@@ -1701,7 +1701,7 @@ fieldset {
   margin: 0.5rem 0 0.2rem;
   font-size: 0.85rem;
   font-weight: 600;
-  color: #011827;
+  color: #021928;
   transition: color 0.3s;
 }
 .contact-section .contact-form input,
@@ -1743,7 +1743,7 @@ fieldset {
 }
 .contact-section .contact-form .label-optional {
   font-weight: 400;
-  color: #011827;
+  color: #021928;
   font-size: 0.85rem;
 }
 .contact-section .contact-info {
