@@ -30,6 +30,11 @@ footer {
             li a {
                 color: white;
                 text-decoration: none;
+
+                &:hover,
+                &.active {
+                    color: $color-secondary;
+                }
             }
         }
     }
@@ -52,6 +57,11 @@ footer {
         li a {
             color: white;
             text-decoration: none;
+
+            &:hover,
+            &.active {
+                color: $color-secondary;
+            }
         }
     }
 
