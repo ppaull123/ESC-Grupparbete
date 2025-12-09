@@ -3,31 +3,30 @@ name: Cypress Testing
 on:
   push:
     branches:
-      - main
       - cypress-testing
   pull_request:
     branches:
-      - main
+      - cypress-testing
 
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
 
     steps:
+      # 1. Checkout code
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      # 2. Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
 
-      - name: Install dependencies
-        run: npm install
-
+      # 3. Run Cypress tests (install handled by action, cached automatically)
       - name: Run Cypress tests
         uses: cypress-io/github-action@v6
         with:
+          install: true
           browser: chrome
           headed: false
-          install: false
