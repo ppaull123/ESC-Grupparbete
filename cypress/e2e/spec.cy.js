@@ -1,4 +1,11 @@
 describe("open project", () => {
+  it("Test: h1 contains Hacker Escape Rooms", () => {
+    cy.visit("/index.html")
+    cy.get("h1").should("contain", "Hacker Escape Rooms")
+  })
+})
+
+describe("open project", () => {
   it("Test when everything pass", () => {
     cy.visit("/index.html")
     cy.contains("Play on-site").click()
